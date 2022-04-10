@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 public class Title : MonoBehaviour
 {
      public string SceneToLoad;
-    
+     public string SceneToLoad2;
+    public string SceneToLoad3;
+
      void Start() {
         
     }
@@ -16,6 +18,15 @@ public class Title : MonoBehaviour
     {
         SceneManager.LoadScene(SceneToLoad);
     }
+    public void LoadOptions()
+    {
+        SceneManager.LoadScene(SceneToLoad2);
+    }
+    public void LoadOScoreBoard()
+    {
+        SceneManager.LoadScene(SceneToLoad3);
+    }
+
 // public void QuitGame()
 //     {
 //         Application.quitting;
