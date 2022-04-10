@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 3811345}
   - component: {fileID: 3811344}
   - component: {fileID: 3811348}
+  - component: {fileID: 3811349}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -242,6 +243,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneToLoad: Test
+--- !u!114 &3811349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859df6a59ba3741878a787bada7b2f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: OptionScreen
 --- !u!1 &241738505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1465,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2073945825}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3811349}
+        m_TargetAssemblyTypeName: GoOptions, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2073945825
 MonoBehaviour:
   m_ObjectHideFlags: 0
