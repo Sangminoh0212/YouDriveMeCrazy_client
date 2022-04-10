@@ -26,6 +26,10 @@ public class Title : MonoBehaviour
     {
         SceneManager.LoadScene(SceneToLoad3);
     }
+    public void GameExit()
+    {
+        Application.Quit();
+    }
 
 // public void QuitGame()
 //     {
