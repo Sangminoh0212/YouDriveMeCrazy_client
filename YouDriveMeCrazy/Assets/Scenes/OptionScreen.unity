@@ -208,8 +208,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundToggle, Assembly-CSharp
+      - m_Target: {fileID: 1691336704}
+        m_TargetAssemblyTypeName: SoundSlider, Assembly-CSharp
         m_MethodName: ToggleAudioVolume
         m_Mode: 1
         m_Arguments:
