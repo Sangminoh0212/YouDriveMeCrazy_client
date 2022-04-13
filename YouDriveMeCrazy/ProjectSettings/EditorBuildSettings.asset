@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/OptionScreen.unity
     guid: d9e7b6ad909eb4a62b9b4c152fa521d9
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/Scenes/DriveCar.unity
     guid: bf6663b8cd707424b8a33df286a8decd
   - enabled: 1
     path: Assets/Scenes/ScoreBoardScreen.unity
