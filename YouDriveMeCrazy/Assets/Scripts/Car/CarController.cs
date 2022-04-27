@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public static CarController carController;
+
+
+    // Let's see is it needed
+    public static CarController carController;  
+    // Temporary variables for test.
+    // Will be located in InputController
     public KeyCode leftTurnBtn, rightTurnBtn, gotoLeftWiperBtn, gotoRightWiperBtn, leftTurnSignalBtn, rightTurnSignalBtn, brakeBtn, accelBtn, klaxonBtn;
 
+    [Header("Input")]
+    public InputManager inputManager;
+
+    public float verticalInput;
+    public float horizontalInput;
+    public bool isWiperPressing;
+    public bool preIsWiperPressing;
+    public bool isWiperLeft = false;
+
+    [Header("Wheel Control")]
+    #region Wheel Control
     public float engineForce = 900f;
     public float steerAngle = 30f;
     public float breakForce = 30000f;
@@ -27,6 +43,7 @@ public class CarController : MonoBehaviour
     // expose wheel rotate for the generic tracker
     public Quaternion frontWheelRot;
     public Quaternion rearWheelRot;
+    #endregion
 
 
     private void Start()
@@ -44,56 +61,28 @@ public class CarController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        GetInput();
 
         UpdateWheelPhysics();
         UpdateWheelTransforms();
-        if (Input.GetKeyDown(leftTurnBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(rightTurnBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(gotoLeftWiperBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(gotoRightWiperBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(leftTurnSignalBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(rightTurnSignalBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(brakeBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(accelBtn))
-        {
-
-        }
-        if (Input.GetKeyDown(klaxonBtn))
-        {
-
-        }
+        UpdateWiper();
     }
-    /// <summary>
-    /// Updates the wheel transforms.
-    /// </summary>
-    void UpdateWheelTransforms()
-    {
 
+    // Get input from InputController(for now ControllerManager)
+    private void GetInput()
+    {
+        verticalInput = inputManager.GetVertical();
+        horizontalInput = inputManager.GetHorizontal();
+        
+        
+        isWiperPressing = inputManager.IsWiperPressing();
+    }
+
+    // Updates the wheel transforms.
+    private void UpdateWheelTransforms()
+    {
         Quaternion rotation;
         Vector3 position;
 
@@ -124,26 +113,20 @@ public class CarController : MonoBehaviour
         //frontRightTransform.rotation = frontWheelRot;
         //rearLeftTransform.rotation = rearWheelRot;
         //rearRightTransform.rotation = rearWheelRot;
-
     }
 
-    /// <summary>
-    /// Updates the wheel physics.
-    /// </summary>
-    void UpdateWheelPhysics()
+    // Updates the wheel physics.
+    private void UpdateWheelPhysics()
     {
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
-
         // accelerate
-        rearRightCollider.motorTorque = v * engineForce;
-        rearLeftCollider.motorTorque = v * engineForce;
-        frontRightCollider.motorTorque = v * engineForce;
-        frontLeftCollider.motorTorque = v * engineForce;
+        rearRightCollider.motorTorque = verticalInput * engineForce;
+        rearLeftCollider.motorTorque = verticalInput * engineForce;
+        frontRightCollider.motorTorque = verticalInput * engineForce;
+        frontLeftCollider.motorTorque = verticalInput * engineForce;
 
         // steer
-        frontRightCollider.steerAngle = h * steerAngle;
-        frontLeftCollider.steerAngle = h * steerAngle;
+        frontRightCollider.steerAngle = horizontalInput * steerAngle;
+        frontLeftCollider.steerAngle = horizontalInput * steerAngle;
 
         // apply brakeTorque
         if (Input.GetKey(KeyCode.Space))
@@ -165,5 +148,19 @@ public class CarController : MonoBehaviour
             frontLeftCollider.brakeTorque = 0;
         }
     }
-}
 
+    private void UpdateWiper()
+    {
+        if (!preIsWiperPressing && isWiperPressing)
+        {
+            ChangeWiperState();
+        }
+
+        preIsWiperPressing = isWiperPressing;
+    }
+
+    private void ChangeWiperState()
+    {
+        
+    }
+}
