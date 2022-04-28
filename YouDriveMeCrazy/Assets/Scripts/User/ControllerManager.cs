@@ -10,7 +10,7 @@ public class ControllerManager : MonoBehaviour
     private CarController carController;
 
     public void Start(){
-        carController = GameObject.Find("Car").GetComponent<CarController>();
+        //carController = GameObject.Find("Car").GetComponent<CarController>();
     }
 
     public void TurnLeft(){
