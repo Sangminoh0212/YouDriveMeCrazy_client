@@ -12,119 +12,77 @@ public class TrafficLightManager : MonoBehaviour
     
 
     [Header("Cycle Time")]
-    [SerializeField] private float redLightTime = 0.5f;
-    [SerializeField] private float yellowLightTime = 3f;
-    [SerializeField] private float greenLightTime = 3f;
+    [SerializeField] private float redLightTime = 10f;
+    [SerializeField] private float yellowLightTime = 5f;
+    [SerializeField] private float greenLightTime = 20f;
+
+    private BoxCollider sensingArea;
 
     private bool isRedLight = false;
-    private bool isYellowLight = false;
-    private bool isTrafficLightWork = true;
+    private bool isWorking = true;
 
-    private int testNum = 0;
+    private float timer;
+    private float totalTime;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        sensingArea = GetComponent<BoxCollider>();
+        sensingArea.enabled = false;
+
         redLight.SetActive(false);
         yellowLight.SetActive(false);
         greenLight.SetActive(false);
 
-        StartCoroutine(Timer(redLightTime));
+        totalTime = redLightTime + yellowLightTime + greenLightTime;
+
+        StartCoroutine(Timer());
     }
 
-    private void TrafficLightCycle(){
-        if(isTrafficLightWork){
-            print("green light on");
-            //StartCoroutine(Timer(greenLightTime));
-            print("yellow light on");
-            //StartCoroutine(Timer(yellowLightTime));
-            print("red light on");
-            //StartCoroutine(Timer(redLightTime));
-        }
-    }
 
     // If car cross the reference line on a red light, colliding is detected    
     private void OnTriggerEnter(Collider other) {
-        if(other!=null && redLight){
-            //print(other.gameObject.name);
+        if(other.tag == "Car" && isRedLight){
+            isWorking = false;
+            //gameManager.gameover()
+            print("빨간불에 진입하셨습니다.");
+            print(other.name);
+            
         }
     }
 
-    IEnumerator Timer(float time){
-        
-        var waitTime = new WaitForSeconds(time);
-        yield return waitTime;
-        testNum += 1;
-        print(testNum);
-        yield return waitTime;
-        testNum += 3;
-        print(testNum);
-        StartCoroutine(Timer(redLightTime));
-    }
+    IEnumerator Timer(){
+        timer = 0f;
 
-
-
-    /*
-    IEnumerator RedLight()
-    {
-        print("red on");
-        yellowLight.SetActive(false);
-        redLight.SetActive(true);
-        yield return new WaitForSeconds(redLightTime);
+        //turn on green light
+        redLight.SetActive(false);
+        greenLight.SetActive(true);
         isRedLight = false;
-    }
+        sensingArea.enabled = false;
 
+        while(timer < totalTime){
+            timer += Time.deltaTime;
+            
+            if(timer > greenLightTime && timer < greenLightTime+yellowLightTime) {
+                // turn on yellow light
+                greenLight.SetActive(false);
+                yellowLight.SetActive(true);
+            }
+            else if (timer > greenLightTime+yellowLightTime){
+                //turn on red light
+                yellowLight.SetActive(false);
+                redLight.SetActive(true);
+                isRedLight = true;
+                sensingArea.enabled = true;
+            }
 
-    IEnumerator YellowLight()
-    {
-        print("yellow on");
-        redLight.SetActive(false);
-        greenLight.SetActive(true);
-        yield return new WaitForSeconds(greenLightTime);
-        isYellowLight = false;
-        isRedLight = true;
-
-
-    }
-
-
-    IEnumerator GreenLight(){
-        print("green on");
-        redLight.SetActive(false);
-        greenLight.SetActive(true);
-        yield return new WaitForSeconds(greenLightTime);
-        isYellowLight = true;
-        print("green on2");
-    }
-    */
-
-    /*
-    IEnumerator TrafficLightCycle(){
-        while(true){
-            redLight.SetActive(false);
-            greenLight.SetActive(true);
-            isRedLight = false;
-            print("green on");
-            yield return new WaitForSeconds(greenLightTime);
-
-            print("yellow on");
-            greenLight.SetActive(false);
-            yellowLight.SetActive(true);
-            yield return new WaitForSeconds(yellowLightTime);
-
-            print("red on");
-            yellowLight.SetActive(false);
-            redLight.SetActive(true);
-            isRedLight = true;
-            yield return new WaitForSeconds(redLightTime);
+            yield return null;  
         }
+        if(isWorking) StartCoroutine(Timer());
     }
-    */
-
-
-    // greenTime=20초 후 ->  yellowLight.SetActive(true) && greenLight.SetActive(false); 
-    // yellowTime=5초 후 -> redLight.SetActive(true) && yellowLight.SetActive(False); 
-    // redTime=10초 후 -> greenLight.SetActive(true) && redLight.SetActive(False); 
 
 
 }
