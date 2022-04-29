@@ -527,9 +527,9 @@ MonoBehaviour:
   redLight: {fileID: 8088414164492679265}
   yellowLight: {fileID: 8088414165864200500}
   greenLight: {fileID: 8088414165686474067}
-  redLightTime: 10
-  yellowLightTime: 5
-  greenLightTime: 20
+  redLightTime: 3
+  yellowLightTime: 3
+  greenLightTime: 4
 --- !u!65 &8088414165305285616
 BoxCollider:
   m_ObjectHideFlags: 0
