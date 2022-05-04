@@ -1,7 +1,11 @@
+using System;
+using System.Linq;
+using System.Security.Cryptography;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Photon
 {
@@ -31,17 +35,27 @@ namespace Photon
         {
             // 이 Scene 이 시작되었을 때 서버 연결이 안되어있는 상태면 roomState 를 Not Connected 로 설정
             // 서버 연결이 되어있으면 Not In Room 으로 설정
-            if(PhotonNetwork.IsConnected) roomState = NotConnectedRoomState.GetInstance();
+            if(!PhotonNetwork.IsConnected) roomState = NotConnectedRoomState.GetInstance();
             else roomState = NotInRoomState.GetInstance();
         
             // Photon 초기 설정
+            base.OnEnable();
             PhotonNetwork.AutomaticallySyncScene = true;    // 이게 없으면 Scene의 동기화가 안된다더라...
             PhotonNetwork.GameVersion = "1";                // 뭔지 잘 모름 TODO: 시간 나면 자세히 알아보기
+            Debug.Log("Try to connect");
             PhotonNetwork.ConnectUsingSettings();           // Master Server 에 연결하는 함수 -> OnConnectedToServer() 호출
         }
 
         private void Update()
         {
+            // 네트워크에 연결되어 있지 않은 경우
+            if (!PhotonNetwork.IsConnectedAndReady) roomState = NotConnectedRoomState.GetInstance();
+            else
+            {
+                if (!PhotonNetwork.InRoom) roomState = NotInRoomState.GetInstance();
+                else roomState = InRoomState.GetInstance();
+            }
+            
             // 매 프레임마다 roomState에 맞춰 Panel을 설정함
             if(roomState != null) roomState.SetPanel(connectingPanel, enterPanel, roomPanel, p1NicknameText, p2NicknameText, currentRoomCodeText);
         }
@@ -56,11 +70,32 @@ namespace Photon
             // TODO: 유효한 닉네임의 기준 정해야 함
             return nicknameInput.text.Length > 0;
         }
+        
+        private string CreateRandomString(int length)
+        {
+            Random random = new Random();
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-/*@#";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         #endregion
 
         #region Public Methods
 
+        // Connect Button onClick
+        public void Connect()
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                Debug.Log("already connected");
+            }
+            else
+            {
+                PhotonNetwork.ConnectUsingSettings();    
+            }
+        }
+        
         // New Room Button onClick
         public void NewRoom()
         {
@@ -71,8 +106,10 @@ namespace Photon
             PhotonNetwork.NickName = nicknameInput.text;
         
             // Create Room
-            string roomCode = roomCodeInput.text;
-            PhotonNetwork.CreateRoom(roomCode.Length < 1 ? null : roomCode, new RoomOptions
+            // string roomCode = roomCodeInput.text;
+            string roomCode = CreateRandomString(8);
+            
+            PhotonNetwork.CreateRoom(roomCode, new RoomOptions
             {
                 MaxPlayers = maxPlayers
             });
@@ -90,6 +127,20 @@ namespace Photon
         
             // join room
             PhotonNetwork.JoinRoom(roomCodeInput.text);
+        }
+        
+        // Random Enter Button onClick
+        public void RandomEnter()
+        {
+            // TODO: 중복 코드 수정
+            // TODO: 닉네임이 유효하지 않을 때 피드백
+            if (!CheckNickname()) return;
+            
+            // set nickname
+            PhotonNetwork.NickName = nicknameInput.text;
+        
+            // join room
+            PhotonNetwork.JoinRandomRoom();
         }
         
         // Play Button Onclick
@@ -113,6 +164,12 @@ namespace Photon
                 Debug.Log("Only master client can push play");
             }
         }
+        
+        // Exit Button onClick
+        public void Exit()
+        {
+            PhotonNetwork.LeaveRoom();
+        }
 
         #endregion
 
@@ -122,9 +179,6 @@ namespace Photon
         public override void OnJoinedRoom()
         {
             Debug.Log(PhotonNetwork.CurrentRoom.Name);
-        
-            // roomState를 In Room 으로 변경
-            roomState = InRoomState.GetInstance();
         }
 
         // 방 입장에 실패했을 때
@@ -136,12 +190,9 @@ namespace Photon
         }
 
         // 서버에 연결되었을 때
-        private void OnConnectedToServer()
+        public void OnConnectedToServer()
         {
             Debug.Log("Connected!");
-        
-            // roomState를 Not In Room 으로 변경
-            roomState = NotInRoomState.GetInstance();
         }
 
         #endregion
