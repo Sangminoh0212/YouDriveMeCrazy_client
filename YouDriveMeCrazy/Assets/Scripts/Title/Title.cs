@@ -35,7 +35,7 @@ public class Title : MonoBehaviour
     }
     public void LoadGame()
     {
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadScene("Minho_DriveCar");
     }
     public void LoadOptions()
     {
