@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843575277632135639, guid: 8dcf7c6acc947ed49adc9085b9bbfc63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.337
       objectReference: {fileID: 0}
     - target: {fileID: 1843575277632135639, guid: 8dcf7c6acc947ed49adc9085b9bbfc63, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 1321183455}
   - component: {fileID: 1321183459}
   m_Layer: 0
-  m_Name: SampleCar
+  m_Name: Car
   m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,9 @@ public class WhiteLane_left : MonoBehaviour
     [SerializeField ] private GameObject rightCollider;
     [HideInInspector] public bool isBtnTurnOn = false;
 
+    private void Start() {
+        transform.parent.gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
     private void OnTriggerEnter(Collider other) {
         
         
