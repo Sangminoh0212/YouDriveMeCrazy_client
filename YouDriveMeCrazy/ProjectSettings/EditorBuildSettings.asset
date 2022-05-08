@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: a126de36ca81f4df2a2d5acea35f2de5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/OptionScreen.unity
-    guid: d9e7b6ad909eb4a62b9b4c152fa521d9
-  - enabled: 1
-    path: Assets/Scenes/DriveCar.unity
+    path: Assets/Scenes/Minho_DriveCar.unity
     guid: bf6663b8cd707424b8a33df286a8decd
-  - enabled: 1
-    path: Assets/Scenes/ScoreBoardScreen.unity
-    guid: cc15e7dadb8c143f98d8306d2ef46395
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

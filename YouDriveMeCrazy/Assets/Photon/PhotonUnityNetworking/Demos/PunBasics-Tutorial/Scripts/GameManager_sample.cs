@@ -23,12 +23,12 @@ namespace Photon.Pun.Demo.PunBasics
 	/// Deals with quiting the room and the game
 	/// Deals with level loading (outside the in room synchronization)
 	/// </summary>
-	public class GameManager : MonoBehaviourPunCallbacks
+	public class GameManager_sample : MonoBehaviourPunCallbacks
     {
 
 		#region Public Fields
 
-		static public GameManager Instance;
+		static public GameManager_sample Instance;
 
 		#endregion
 
@@ -44,12 +44,20 @@ namespace Photon.Pun.Demo.PunBasics
 
         #region MonoBehaviour CallBacks
 
+
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during initialization phase.
         /// </summary>
         void Start()
 		{
-			Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
 			// in case we started this demo with the wrong scene being active, simply load the menu scene
 			if (!PhotonNetwork.IsConnected)
