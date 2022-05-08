@@ -48,7 +48,13 @@ namespace Photon{
         // Update is called once per frame
         void Update()
         {
-
+            if(Input.GetKeyDown(KeyCode.A)){
+                gameOverPanel.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                gameOverPanel.SetActive(false);
+            }
         }
 
         public override void OnLeftRoom(){

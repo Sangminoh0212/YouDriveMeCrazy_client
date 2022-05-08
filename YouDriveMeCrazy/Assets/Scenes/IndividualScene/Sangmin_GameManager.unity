@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &256970706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -917,8 +917,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player1Prefab: {fileID: 0}
   _player2Prefab: {fileID: 0}
-  stageClearPanel: {fileID: 0}
-  gameOverPanel: {fileID: 0}
+  stageClearPanel: {fileID: 256970705}
+  gameOverPanel: {fileID: 1525482359}
   policeCar: {fileID: 8051530898532935789, guid: d52f56490d915134b8b4ee35848664d8, type: 3}
 --- !u!114 &787864795
 MonoBehaviour:
