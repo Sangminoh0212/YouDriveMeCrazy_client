@@ -152,7 +152,7 @@ namespace Photon
             {
                 if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
                 {
-                    // 게임 실행 코드
+                    PhotonNetwork.LoadLevel("Minho_DriveCar");
                 }
                 else
                 {
