@@ -190,9 +190,9 @@ namespace Photon
         }
 
         // 서버에 연결되었을 때
-        public void OnConnectedToServer()
+        public override void OnConnectedToMaster()
         {
-            Debug.Log("Connected!");
+            
         }
 
         #endregion
