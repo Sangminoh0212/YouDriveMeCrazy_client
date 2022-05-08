@@ -67,8 +67,21 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         rb.centerOfMass = centerOfMass.localPosition;
     }
 
+    float timer;
+
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer > 1.0f)
+        {
+            timer = 0;
+            print(isLeftTurnPressing);
+            print(isRightTurnPressing);
+            print(isAccelPressing);
+            print(isBreakPressing);
+        }
+
+
         calculateInput();
 
         UpdateWheelPhysics();
@@ -175,35 +188,27 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
+        if (PhotonNetwork.IsMasterClient)
         {
-            // We own this player: send the others our data
-            stream.SendNext(this.isBreakPressing);
-            stream.SendNext(this.isLeftTurnPressing);
-            stream.SendNext(this.isLeftTurnSignalPressing);
-            stream.SendNext(this.isRightTurnSignalPressing);
-            stream.SendNext(this.isKlaxon1Pressing);
-
-            stream.SendNext(this.isAccelPressing);
-            stream.SendNext(this.isRightTurnPressing);
-            stream.SendNext(this.isGotoLeftWiperPressing);
-            stream.SendNext(this.isGotoRightWiperPressing);
-            stream.SendNext(this.isKlaxon2Pressing);
+            if(stream.IsReading)
+            {
+                this.isAccelPressing = (bool)stream.ReceiveNext();
+                this.isRightTurnPressing = (bool)stream.ReceiveNext();
+                this.isGotoLeftWiperPressing = (bool)stream.ReceiveNext();
+                this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
+                this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
+            }
         }
         else
         {
-            // Network player, receive data
-            this.isBreakPressing = (bool)stream.ReceiveNext();
-            this.isLeftTurnPressing = (bool)stream.ReceiveNext();
-            this.isLeftTurnSignalPressing = (bool)stream.ReceiveNext();
-            this.isRightTurnSignalPressing = (bool)stream.ReceiveNext();
-            this.isKlaxon1Pressing = (bool)stream.ReceiveNext();
-
-            this.isAccelPressing = (bool)stream.ReceiveNext();
-            this.isRightTurnPressing = (bool)stream.ReceiveNext();
-            this.isGotoLeftWiperPressing = (bool)stream.ReceiveNext();
-            this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
-            this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
+            if (stream.IsWriting)
+            {
+                stream.SendNext(this.isAccelPressing);
+                stream.SendNext(this.isRightTurnPressing);
+                stream.SendNext(this.isGotoLeftWiperPressing);
+                stream.SendNext(this.isGotoRightWiperPressing);
+                stream.SendNext(this.isKlaxon2Pressing);
+            }
         }
     }
 }
