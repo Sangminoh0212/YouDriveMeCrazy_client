@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class InputManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         // Player 1
-        if (true)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(brakeBtn)) { CarController.carController.isBreakPressing = true; }
             else { CarController.carController.isBreakPressing = false; }
@@ -31,7 +32,7 @@ public class InputManager : MonoBehaviour
         }
 
         //Player 2 
-        if (true)
+        if (!PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(accelBtn)) { CarController.carController.isAccelPressing = true; }
             else { CarController.carController.isAccelPressing = false; }
