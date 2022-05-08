@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public static CarController carController;
 
+    #region Player Input
+    // These bool variables should be "private" and have "get", "set" method later
+    
+    // Player1
+    [HideInInspector] public bool isBreakPressing;
+    [HideInInspector] public bool isLeftTurnPressing;
+    [HideInInspector] public bool isLeftTurnSignalPressing;
+    [HideInInspector] public bool isRightTurnSignalPressing;
+    [HideInInspector] public bool isKlaxon1Pressing;
 
-    // Let's see is it needed
-    public static CarController carController;  
-    // Temporary variables for test.
-    // Will be located in InputController
-    public KeyCode leftTurnBtn, rightTurnBtn, gotoLeftWiperBtn, gotoRightWiperBtn, leftTurnSignalBtn, rightTurnSignalBtn, brakeBtn, accelBtn, klaxonBtn;
+    //Player2
+    [HideInInspector] public bool isAccelPressing;
+    [HideInInspector] public bool isRightTurnPressing;
+    [HideInInspector] public bool isGotoLeftWiperPressing;
+    [HideInInspector] public bool isGotoRightWiperPressing;
+    [HideInInspector] public bool isKlaxon2Pressing;
+    
 
-    [Header("Input")]
-    public InputManager inputManager;
+    #region Calculated Input Values
+    public float keyMomentum = 3f;  // Key Input goes 1 in 1/3f seconds
+    private float accelValue;
+    private float turnValue;
+    private bool wasBreakPressed;
+    #endregion
 
-    public float verticalInput;
-    public float horizontalInput;
-    public bool isWiperPressing;
-    public bool preIsWiperPressing;
-    public bool isWiperLeft = false;
+    #endregion
 
     [Header("Wheel Control")]
     #region Wheel Control
@@ -52,32 +64,26 @@ public class CarController : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass.localPosition;
-
-        //// disable collider for remote copy
-        //frontRightCollider.enabled = false;
-        //frontLeftCollider.enabled = false;
-        //rearRightCollider.enabled = false;
-        //rearLeftCollider.enabled = false;
-
     }
 
     void Update()
     {
-        GetInput();
+        calculateInput();
 
         UpdateWheelPhysics();
         UpdateWheelTransforms();
-        UpdateWiper();
+        //UpdateWiper();
     }
 
-    // Get input from InputController(for now ControllerManager)
-    private void GetInput()
+    private void calculateInput()
     {
-        verticalInput = inputManager.GetVertical();
-        horizontalInput = inputManager.GetHorizontal();
-        
-        
-        isWiperPressing = inputManager.IsWiperPressing();
+        // Map isPressing variables to -1 ~ +1 float values
+        accelValue += isAccelPressing? keyMomentum * Time.deltaTime:-keyMomentum * Time.deltaTime;
+        accelValue = Mathf.Clamp(accelValue, 0, 1);
+
+        turnValue += isLeftTurnPressing ? -keyMomentum * Time.deltaTime : keyMomentum * Time.deltaTime;
+        turnValue += isRightTurnPressing ? keyMomentum * Time.deltaTime : -keyMomentum * Time.deltaTime;
+        turnValue = Mathf.Clamp(turnValue, -1, 1);
     }
 
     // Updates the wheel transforms.
@@ -109,28 +115,29 @@ public class CarController : MonoBehaviour
         rearWheelRot = rotation;
 
         //// apply the rotation updates for remote copies
-        //frontLeftTransform.rotation = frontWheelRot;
-        //frontRightTransform.rotation = frontWheelRot;
-        //rearLeftTransform.rotation = rearWheelRot;
-        //rearRightTransform.rotation = rearWheelRot;
+        frontLeftTransform.rotation = frontWheelRot;
+        frontRightTransform.rotation = frontWheelRot;
+        rearLeftTransform.rotation = rearWheelRot;
+        rearRightTransform.rotation = rearWheelRot;
     }
 
     // Updates the wheel physics.
     private void UpdateWheelPhysics()
     {
         // accelerate
-        rearRightCollider.motorTorque = verticalInput * engineForce;
-        rearLeftCollider.motorTorque = verticalInput * engineForce;
-        frontRightCollider.motorTorque = verticalInput * engineForce;
-        frontLeftCollider.motorTorque = verticalInput * engineForce;
+        rearRightCollider.motorTorque = accelValue * engineForce;
+        rearLeftCollider.motorTorque = accelValue * engineForce;
+        frontRightCollider.motorTorque = accelValue * engineForce;
+        frontLeftCollider.motorTorque = accelValue * engineForce;
 
         // steer
-        frontRightCollider.steerAngle = horizontalInput * steerAngle;
-        frontLeftCollider.steerAngle = horizontalInput * steerAngle;
+        frontRightCollider.steerAngle = turnValue * steerAngle;
+        frontLeftCollider.steerAngle = turnValue * steerAngle;
 
         // apply brakeTorque
-        if (Input.GetKey(KeyCode.Space))
+        if (isBreakPressing && !wasBreakPressed)
         {
+            wasBreakPressed = true;
             Debug.Log("Break");
             rearRightCollider.brakeTorque = breakForce;
             rearLeftCollider.brakeTorque = breakForce;
@@ -139,8 +146,9 @@ public class CarController : MonoBehaviour
         }
 
         // reset brakeTorque
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (!isBreakPressing && wasBreakPressed)
         {
+            wasBreakPressed = false;
             Debug.Log("Break stop");
             rearRightCollider.brakeTorque = 0;
             rearLeftCollider.brakeTorque = 0;
@@ -151,16 +159,16 @@ public class CarController : MonoBehaviour
 
     private void UpdateWiper()
     {
-        if (!preIsWiperPressing && isWiperPressing)
-        {
-            ChangeWiperState();
-        }
+        //if (!preIsWiperPressing && isWiperPressing)
+        //{
+        //    ChangeWiperState();
+        //}
 
-        preIsWiperPressing = isWiperPressing;
+        //preIsWiperPressing = isWiperPressing;
     }
 
     private void ChangeWiperState()
     {
-        
+
     }
 }
