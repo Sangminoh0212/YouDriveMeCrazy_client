@@ -24,7 +24,7 @@ public class WhiteLane_left : MonoBehaviour
             }
             else if (rightCollider.GetComponent<WhiteLane_right>().isBtnTurnOn)
             {
-                print("오른쪽에서 왼쪽 깜빡이 키고 진입한거라 ㄱㅊ");
+                //print("오른쪽에서 왼쪽 깜빡이 키고 진입한거라 괜찮다.");
                 return;
             }
             else{
