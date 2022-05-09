@@ -4,9 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class CarController : MonoBehaviourPunCallbacks, IPunObservable
+public class NewCarController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public static CarController carController;
+    public static NewCarController carController;
 
     #region Player Input
     // These bool variables should be "private" and have "get", "set" method later
@@ -32,7 +32,6 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     private bool wasBreakPressed;
     #endregion
 
-    [Header("UI")]
     #region UI
     public TextMeshProUGUI breakUI;
     public TextMeshProUGUI leftTurnUI;
@@ -80,15 +79,16 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         rb.centerOfMass = centerOfMass.localPosition;
     }
 
+    float timer;
+
     void Update()
     {
         calculateInput();
         updateUI();
-
         UpdateWheelPhysics();
         UpdateWheelTransforms();
-
     }
+
 
     private void calculateInput()
     {
@@ -105,8 +105,8 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (isBreakPressing) { breakUI.color = Color.red; } else { breakUI.color = Color.black; }
         if (isLeftTurnPressing) { leftTurnUI.color = Color.red; } else { leftTurnUI.color = Color.black; }
-        if (isLeftTurnSignalPressing) { leftTurnSignalUI.color = Color.red; } else { leftTurnSignalUI.color = Color.black; }
-        if (isRightTurnSignalPressing) { rightTurnSignalUI.color = Color.red; } else { rightTurnSignalUI.color = Color.black; }
+        if (leftTurnSignalUI) { leftTurnSignalUI.color = Color.red; } else { leftTurnSignalUI.color = Color.black; }
+        if (rightTurnSignalUI) { rightTurnSignalUI.color = Color.red; } else { rightTurnSignalUI.color = Color.black; }
         if (isKlaxon1Pressing) { klaxon1UI.color = Color.red; } else { klaxon1UI.color = Color.black; }
 
         if (isAccelPressing) { accelUI.color = Color.red; } else { accelUI.color = Color.black; }
@@ -187,9 +187,24 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private void UpdateWiper()
+    {
+        //if (!preIsWiperPressing && isWiperPressing)
+        //{
+        //    ChangeWiperState();
+        //}
+
+        //preIsWiperPressing = isWiperPressing;
+    }
+
+    private void ChangeWiperState()
+    {
+
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (stream.IsReading)
             {
@@ -199,28 +214,9 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
                 this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
                 this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
             }
-
-            if (stream.IsWriting)
-            {
-                stream.SendNext(this.isBreakPressing);
-                stream.SendNext(this.isLeftTurnPressing);
-                stream.SendNext(this.isLeftTurnSignalPressing);
-                stream.SendNext(this.isRightTurnSignalPressing);
-                stream.SendNext(this.isKlaxon1Pressing);
-            }
         }
-
-        if (PhotonNetwork.IsMasterClient)
+        else
         {
-            if (stream.IsReading)
-            {
-                this.isBreakPressing = (bool)stream.ReceiveNext();
-                this.isLeftTurnPressing = (bool)stream.ReceiveNext();
-                this.isLeftTurnSignalPressing = (bool)stream.ReceiveNext();
-                this.isRightTurnSignalPressing = (bool)stream.ReceiveNext();
-                this.isKlaxon1Pressing = (bool)stream.ReceiveNext();
-            }
-
             if (stream.IsWriting)
             {
                 stream.SendNext(this.isAccelPressing);

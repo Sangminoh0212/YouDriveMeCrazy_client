@@ -5,12 +5,7 @@ using UnityEngine;
 public class CrossroadDangerousZone : MonoBehaviour
 {
     void Start()
-    {
-        Vector3 referencePoint = new Vector3(0.0f,5f,0.0f);
-        gameObject.GetComponent<RectTransform>().anchorMin = referencePoint;
-        gameObject.GetComponent<RectTransform>().anchorMax = referencePoint;
-        gameObject.GetComponent<RectTransform>().pivot = referencePoint;
-        
+    {    
         gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
@@ -18,8 +13,7 @@ public class CrossroadDangerousZone : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            // 게임오버
-            // gameManager.gameover()
+            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
         }
     }
 }

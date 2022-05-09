@@ -24,10 +24,6 @@ public class TrafficLightManager : MonoBehaviour
     private float timer;
     private float totalTime;
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         sensingArea = GetComponent<BoxCollider>();
@@ -43,17 +39,17 @@ public class TrafficLightManager : MonoBehaviour
     }
 
 
-    // If car cross the reference line on a red light, colliding is detected    
+    // by 상민, If car cross the reference line on a red light, colliding is detected    
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Car" && isRedLight){
             isWorking = false;
-            //gameManager.gameover()
-            print("빨간불에 진입하셨습니다.");
+            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
             print(other.name);
-            
+            // print("빨간불에 진입하셨습니다.");
         }
     }
 
+    // by 상민, red,yellow,greenLightTime에 따라 신호등 동작, green->yellow->red 순으로 바뀜 
     IEnumerator Timer(){
         timer = 0f;
 

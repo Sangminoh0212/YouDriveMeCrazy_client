@@ -152,7 +152,7 @@ namespace Photon
             {
                 if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
                 {
-                    // 게임 실행 코드
+                    PhotonNetwork.LoadLevel("Minho_DriveCar");
                 }
                 else
                 {
@@ -190,9 +190,9 @@ namespace Photon
         }
 
         // 서버에 연결되었을 때
-        public void OnConnectedToServer()
+        public override void OnConnectedToMaster()
         {
-            Debug.Log("Connected!");
+            
         }
 
         #endregion
