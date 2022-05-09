@@ -677,7 +677,6 @@ GameObject:
   - component: {fileID: 3179703243418985273}
   - component: {fileID: 2607476497262259618}
   - component: {fileID: 4013655307534714336}
-  - component: {fileID: -2807449960541036571}
   m_Layer: 0
   m_Name: Animal_Doe_02
   m_TagString: Untagged
@@ -763,27 +762,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8857151429766120501}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.19030373, y: 0.4101462, z: 0.4170951}
   m_Center: {x: 0.002833259, y: 0.18103717, z: 0.031303264}
---- !u!54 &-2807449960541036571
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8857151429766120501}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8857151429766168189
 GameObject:
   m_ObjectHideFlags: 0
