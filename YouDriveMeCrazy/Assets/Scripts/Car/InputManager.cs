@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         // Player 1
-        if (PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(brakeBtn)) { CarController.carController.isBreakPressing = true; }
             else { CarController.carController.isBreakPressing = false; }
@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
         }
 
         //Player 2 
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(accelBtn)) { CarController.carController.isAccelPressing = true; }
             else { CarController.carController.isAccelPressing = false; }
@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
             if (Input.GetKey(gotoLeftWiperBtn)) { CarController.carController.isGotoLeftWiperPressing = true; }
             else { CarController.carController.isGotoLeftWiperPressing = false; }
 
-            if (Input.GetKey(gotoLeftWiperBtn)) { CarController.carController.isGotoRightWiperPressing = true; }
+            if (Input.GetKey(gotoRightWiperBtn)) { CarController.carController.isGotoRightWiperPressing = true; }
             else { CarController.carController.isGotoRightWiperPressing = false; }
 
             if (Input.GetKey(klaxonBtn2)) { CarController.carController.isKlaxon2Pressing = true; }

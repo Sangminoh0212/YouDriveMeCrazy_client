@@ -10,7 +10,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Player Input
     // These bool variables should be "private" and have "get", "set" method later
-    
+
     // Player1
     [HideInInspector] public bool isBreakPressing;
     [HideInInspector] public bool isLeftTurnPressing;
@@ -24,7 +24,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     [HideInInspector] public bool isGotoLeftWiperPressing;
     [HideInInspector] public bool isGotoRightWiperPressing;
     [HideInInspector] public bool isKlaxon2Pressing;
-    
+
     // Calculated Input Values
     public float keyMomentum = 3f;  // Key Input goes 1 in 1/3f seconds
     private float accelValue;
@@ -32,6 +32,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     private bool wasBreakPressed;
     #endregion
 
+    [Header("UI")]
     #region UI
     public TextMeshProUGUI breakUI;
     public TextMeshProUGUI leftTurnUI;
@@ -83,11 +84,11 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     {
         calculateInput();
         updateUI();
+
         UpdateWheelPhysics();
         UpdateWheelTransforms();
-        //UpdateWiper();
+
     }
-    
 
     private void calculateInput()
     {
@@ -113,7 +114,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         if (isGotoLeftWiperPressing) { gotoLeftWiperUI.color = Color.red; } else { gotoLeftWiperUI.color = Color.black; }
         if (isGotoRightWiperPressing) { gotoRightWiperUI.color = Color.red; } else { gotoRightWiperUI.color = Color.black; }
         if (isKlaxon2Pressing) { klaxon2UI.color = Color.red; } else { klaxon2UI.color = Color.black; }
-}
+    }
 
     // Updates the wheel transforms.
     private void UpdateWheelTransforms()
@@ -186,26 +187,11 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void UpdateWiper()
-    {
-        //if (!preIsWiperPressing && isWiperPressing)
-        //{
-        //    ChangeWiperState();
-        //}
-
-        //preIsWiperPressing = isWiperPressing;
-    }
-
-    private void ChangeWiperState()
-    {
-
-    }
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
-            if(stream.IsReading)
+            if (stream.IsReading)
             {
                 this.isAccelPressing = (bool)stream.ReceiveNext();
                 this.isRightTurnPressing = (bool)stream.ReceiveNext();
@@ -213,9 +199,28 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
                 this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
                 this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
             }
+
+            if (stream.IsWriting)
+            {
+                stream.SendNext(this.isBreakPressing);
+                stream.SendNext(this.isLeftTurnPressing);
+                stream.SendNext(this.isLeftTurnSignalPressing);
+                stream.SendNext(this.isRightTurnSignalPressing);
+                stream.SendNext(this.isKlaxon1Pressing);
+            }
         }
-        else
+
+        if (PhotonNetwork.IsMasterClient)
         {
+            if (stream.IsReading)
+            {
+                this.isBreakPressing = (bool)stream.ReceiveNext();
+                this.isLeftTurnPressing = (bool)stream.ReceiveNext();
+                this.isLeftTurnSignalPressing = (bool)stream.ReceiveNext();
+                this.isRightTurnSignalPressing = (bool)stream.ReceiveNext();
+                this.isKlaxon1Pressing = (bool)stream.ReceiveNext();
+            }
+
             if (stream.IsWriting)
             {
                 stream.SendNext(this.isAccelPressing);
