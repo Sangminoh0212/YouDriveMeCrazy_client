@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Car
+  - StageClearPanel
+  - GameOverPanel
   layers:
   - Default
   - TransparentFX
