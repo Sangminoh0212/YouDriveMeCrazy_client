@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrafficLightController : MonoBehaviour
+public class TrafficLightManager : MonoBehaviour
 {
 
     [Header("Traffic Light")]
@@ -44,6 +44,7 @@ public class TrafficLightController : MonoBehaviour
         if(other.tag == "Car" && isRedLight){
             isWorking = false;
             GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
+            print(other.name);
             // print("빨간불에 진입하셨습니다.");
         }
     }

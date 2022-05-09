@@ -13,11 +13,11 @@ public class WhiteLane_right : MonoBehaviour
         if (other.GetComponent<ClickMovement>().leftBtn)
         {
             this.isBtnTurnOn = true;
-            print("오른쪽에서 진입");
+            //print("오른쪽에서 진입");
         }
         else if (leftCollider.GetComponent<WhiteLane_left>().isBtnTurnOn)
         {
-            print("왼쪽에서 오른쪽 깜빡이 키고 진입한거라 ㄱㅊ");
+            //print("왼쪽에서 오른쪽 깜빡이 키고 진입한거라 괜찮다.");
             return;
         }
         else
