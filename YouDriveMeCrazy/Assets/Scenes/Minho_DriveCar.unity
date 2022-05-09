@@ -1059,7 +1059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1020160170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,6 +1082,16 @@ MonoBehaviour:
   gotoLeftWiperBtn: 97
   gotoRightWiperBtn: 100
   klaxonBtn2: 32
+  isBreakPressing: 0
+  isLeftTurnPressing: 0
+  isLeftTurnSignalPressing: 0
+  isRightTurnSignalPressing: 0
+  isKlaxon1Pressing: 0
+  isAccelPressing: 0
+  isRightTurnPressing: 0
+  isGotoLeftWiperPressing: 0
+  isGotoRightWiperPressing: 0
+  isKlaxon2Pressing: 0
 --- !u!4 &1020160171
 Transform:
   m_ObjectHideFlags: 0
@@ -1531,6 +1541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047658925}
+  - component: {fileID: 2047658926}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1552,6 +1563,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047658926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047658924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb74a64fa884d3479500b2df0171abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 1475442785993366557, guid: 98b44aa7add84ef4e8c7870509bf36c8, type: 3}
 --- !u!1001 &2077645898
 PrefabInstance:
   m_ObjectHideFlags: 0

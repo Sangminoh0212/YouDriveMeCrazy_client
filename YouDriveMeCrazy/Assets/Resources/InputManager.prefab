@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1475442785993366557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6951008370557767314}
+  - component: {fileID: 3415076206459045042}
+  - component: {fileID: -6847740600674201314}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6951008370557767314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475442785993366557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.81651735, y: 2.4922142, z: 8.153345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3415076206459045042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475442785993366557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec51bb674816bc4aa03937025730ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brakeBtn: 274
+  leftTurnBtn: 276
+  leftTurnSignalBtn: 97
+  rightTurnSignalBtn: 100
+  klaxonBtn1: 32
+  accelBtn: 273
+  rightTurnBtn: 275
+  gotoLeftWiperBtn: 97
+  gotoRightWiperBtn: 100
+  klaxonBtn2: 32
+  isBreakPressing: 0
+  isLeftTurnPressing: 0
+  isLeftTurnSignalPressing: 0
+  isRightTurnSignalPressing: 0
+  isKlaxon1Pressing: 0
+  isAccelPressing: 0
+  isRightTurnPressing: 0
+  isGotoLeftWiperPressing: 0
+  isGotoRightWiperPressing: 0
+  isKlaxon2Pressing: 0
+--- !u!114 &-6847740600674201314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475442785993366557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 1
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3415076206459045042}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
