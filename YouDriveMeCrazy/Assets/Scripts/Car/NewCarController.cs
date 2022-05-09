@@ -4,13 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class CarController : MonoBehaviourPunCallbacks, IPunObservable
+public class NewCarController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public static CarController carController;
+    public static NewCarController carController;
 
     #region Player Input
     // These bool variables should be "private" and have "get", "set" method later
-    
+
     // Player1
     [HideInInspector] public bool isBreakPressing;
     [HideInInspector] public bool isLeftTurnPressing;
@@ -24,7 +24,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     [HideInInspector] public bool isGotoLeftWiperPressing;
     [HideInInspector] public bool isGotoRightWiperPressing;
     [HideInInspector] public bool isKlaxon2Pressing;
-    
+
     // Calculated Input Values
     public float keyMomentum = 3f;  // Key Input goes 1 in 1/3f seconds
     private float accelValue;
@@ -79,15 +79,16 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         rb.centerOfMass = centerOfMass.localPosition;
     }
 
+    float timer;
+
     void Update()
     {
         calculateInput();
         updateUI();
         UpdateWheelPhysics();
         UpdateWheelTransforms();
-        //UpdateWiper();
     }
-    
+
 
     private void calculateInput()
     {
@@ -104,8 +105,8 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (isBreakPressing) { breakUI.color = Color.red; } else { breakUI.color = Color.black; }
         if (isLeftTurnPressing) { leftTurnUI.color = Color.red; } else { leftTurnUI.color = Color.black; }
-        if (isLeftTurnSignalPressing) { leftTurnSignalUI.color = Color.red; } else { leftTurnSignalUI.color = Color.black; }
-        if (isRightTurnSignalPressing) { rightTurnSignalUI.color = Color.red; } else { rightTurnSignalUI.color = Color.black; }
+        if (leftTurnSignalUI) { leftTurnSignalUI.color = Color.red; } else { leftTurnSignalUI.color = Color.black; }
+        if (rightTurnSignalUI) { rightTurnSignalUI.color = Color.red; } else { rightTurnSignalUI.color = Color.black; }
         if (isKlaxon1Pressing) { klaxon1UI.color = Color.red; } else { klaxon1UI.color = Color.black; }
 
         if (isAccelPressing) { accelUI.color = Color.red; } else { accelUI.color = Color.black; }
@@ -113,7 +114,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
         if (isGotoLeftWiperPressing) { gotoLeftWiperUI.color = Color.red; } else { gotoLeftWiperUI.color = Color.black; }
         if (isGotoRightWiperPressing) { gotoRightWiperUI.color = Color.red; } else { gotoRightWiperUI.color = Color.black; }
         if (isKlaxon2Pressing) { klaxon2UI.color = Color.red; } else { klaxon2UI.color = Color.black; }
-}
+    }
 
     // Updates the wheel transforms.
     private void UpdateWheelTransforms()
@@ -205,7 +206,7 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if(stream.IsReading)
+            if (stream.IsReading)
             {
                 this.isAccelPressing = (bool)stream.ReceiveNext();
                 this.isRightTurnPressing = (bool)stream.ReceiveNext();
