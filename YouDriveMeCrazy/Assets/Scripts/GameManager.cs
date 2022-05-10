@@ -77,45 +77,32 @@ public class GameManager : MonoBehaviourPunCallbacks
     public IEnumerator GameOver()
     {
         print("game over!!");
+        // by 상민, 경찰차 소환 필요
         yield return new WaitForSeconds(2f);
 
         if(gameOverPanel != null) gameOverPanel.SetActive(true);
     }
 
-
     // by 상민, 버튼 누른 사람이 방장&&현재 참가자 두명일 때 만 게임 재시작 가능
     // photonView.RPC 를 이용해 Master, client 모두 RestartStage1Scene() 호출
-    public void RestartStage1()
+    public void RestartStage(int i)
     {
         if (PhotonNetwork.IsMasterClient){
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2){
                 PhotonView photonView = PhotonView.Get(this);
-                photonView.RPC("RestartStage1Scene", RpcTarget.All);
+                photonView.RPC("RestartStage" + i+ "Scene", RpcTarget.All);
             }
         }
     }
 
 
+    #region ChangeScene
     // by 상민, 새로운 씬 로드하기 전 현재 오브젝트 제거
     [PunRPC]
     public void RestartStage1Scene(){
         PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer.ActorNumber);
         PhotonNetwork.LoadLevel(1);
     }
-
-
-    // by 상민, 버튼 누른 사람이 방장&&현재 참가자 두명일 때 만 게임 재시작 가능
-    // photonView.RPC 를 이용해 Master, client 모두 RestartStage2Scene() 호출
-    public void RestartStage2()
-    {
-        if (PhotonNetwork.IsMasterClient){
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2){
-                PhotonView photonView = PhotonView.Get(this);
-                photonView.RPC("RestartStage2Scene", RpcTarget.All);
-            }
-        }
-    }
-
 
     // by 상민, 새로운 씬 로드하기 전 현재 오브젝트 제거
     [PunRPC]
@@ -151,6 +138,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Destroy(gameObject);
     }
+
+    #endregion
 
 }
 
