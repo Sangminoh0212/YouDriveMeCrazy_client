@@ -747,10 +747,10 @@ GameObject:
   m_Component:
   - component: {fileID: 754664531788230550}
   - component: {fileID: 754664531788230551}
-  - component: {fileID: 754664531788230548}
-  - component: {fileID: 433468332697242228}
   - component: {fileID: 7677042580172300896}
-  m_Layer: 0
+  - component: {fileID: -7951346350215654761}
+  - component: {fileID: 623384618792624991}
+  m_Layer: 7
   m_Name: Animal_Horse_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,9 +764,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754664531788230549}
-  m_LocalRotation: {x: -0, y: -1, z: 0, w: -0.00025297952}
-  m_LocalPosition: {x: 7.8102937, y: 0, z: 15.747285}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05294326, y: 0.05294326, z: 0.05294326}
   m_Children:
   - {fileID: 754664531904393988}
   - {fileID: 754664532685706845}
@@ -776,7 +776,7 @@ Transform:
   - {fileID: 754664531810881309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -180.029, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &754664531788230551
 Animator:
   serializedVersion: 3
@@ -796,33 +796,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &754664531788230548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754664531788230549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: debd59f411d114fa281c68790bf89b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 25
---- !u!114 &433468332697242228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754664531788230549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e68233a578d4774bad9b9d1c8710c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundary: 50
-  lowerbound: -20
 --- !u!65 &7677042580172300896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -831,11 +804,39 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754664531788230549}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.269015, y: 38.05952, z: 45.926376}
-  m_Center: {x: 0.5688724, y: 18.529749, z: 3.6964777}
+  m_Size: {x: 11.123888, y: 36.599285, z: 44.129158}
+  m_Center: {x: -0.105083466, y: 18.361261, z: 4.595084}
+--- !u!114 &-7951346350215654761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754664531788230549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04cff3b04c98e74486c6eb28480a698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &623384618792624991
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754664531788230549}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &754664531803045421
 GameObject:
   m_ObjectHideFlags: 0
