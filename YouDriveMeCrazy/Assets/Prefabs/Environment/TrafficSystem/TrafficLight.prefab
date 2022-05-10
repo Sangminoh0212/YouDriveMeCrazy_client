@@ -125,7 +125,7 @@ Transform:
   m_Children:
   - {fileID: 8088414165373261464}
   m_Father: {fileID: 1162611754334657730}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414164492679269
 MeshFilter:
@@ -315,7 +315,7 @@ Transform:
   m_Children:
   - {fileID: 8088414165455402512}
   m_Father: {fileID: 1162611755268191326}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414164845644771
 MeshFilter:
@@ -412,7 +412,7 @@ Transform:
   m_Children:
   - {fileID: 8088414164346533628}
   m_Father: {fileID: 1162611755268191326}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414164879590917
 MeshFilter:
@@ -486,8 +486,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8088414165305285630}
-  - component: {fileID: 8088414165305285617}
   - component: {fileID: 8088414165305285616}
+  - component: {fileID: 7203371559276049673}
   m_Layer: 0
   m_Name: TrafficLight
   m_TagString: Untagged
@@ -512,7 +512,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8088414165305285617
+--- !u!65 &8088414165305285616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088414165305285631}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.415422, y: 1, z: 10.855612}
+  m_Center: {x: 6.9307947, y: 0, z: 4.927806}
+--- !u!114 &7203371559276049673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,22 +540,9 @@ MonoBehaviour:
   redLight: {fileID: 8088414164492679265}
   yellowLight: {fileID: 8088414165864200500}
   greenLight: {fileID: 8088414165686474067}
-  redLightTime: 3
-  yellowLightTime: 3
-  greenLightTime: 4
---- !u!65 &8088414165305285616
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088414165305285631}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 9.415422, y: 1, z: 10.855612}
-  m_Center: {x: 6.9307947, y: 0, z: 4.927806}
+  redLightTime: 10
+  yellowLightTime: 5
+  greenLightTime: 20
 --- !u!1 &8088414165373261465
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +854,7 @@ Transform:
   m_Children:
   - {fileID: 8088414165849090606}
   m_Father: {fileID: 1162611754334657730}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414165686474071
 MeshFilter:
@@ -1044,7 +1044,7 @@ Transform:
   m_Children:
   - {fileID: 8088414164751675593}
   m_Father: {fileID: 1162611754334657730}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414165864200648
 MeshFilter:
@@ -1141,7 +1141,7 @@ Transform:
   m_Children:
   - {fileID: 8088414165684250771}
   m_Father: {fileID: 1162611755268191326}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8088414165885198940
 MeshFilter:
