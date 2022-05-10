@@ -74,8 +74,9 @@ public class CarController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
         carController = this;
-
+        
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass.localPosition;
     }
