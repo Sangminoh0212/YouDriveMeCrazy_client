@@ -15,7 +15,7 @@ public class YellowLane : MonoBehaviour
 
             if(other.tag == "Car"){
             // by 상민, 자동차 속도 천천히 줄이기 필요
-            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
+            GameManager.Instance.GameOver();
             this.GetComponent<Collider>().enabled = false;
             // print("노란선 접근. 게임 오버") ;
         }

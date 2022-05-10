@@ -487,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8088414165305285630}
   - component: {fileID: 8088414165305285616}
-  - component: {fileID: 7203371559276049673}
+  - component: {fileID: 331600486173624743}
   m_Layer: 0
   m_Name: TrafficLight
   m_TagString: Untagged
@@ -525,7 +525,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.415422, y: 1, z: 10.855612}
   m_Center: {x: 6.9307947, y: 0, z: 4.927806}
---- !u!114 &7203371559276049673
+--- !u!114 &331600486173624743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

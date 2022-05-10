@@ -13,7 +13,7 @@ public class CrossroadDangerousZone : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
+            GameManager.Instance.GameOver();
         }
     }
 }

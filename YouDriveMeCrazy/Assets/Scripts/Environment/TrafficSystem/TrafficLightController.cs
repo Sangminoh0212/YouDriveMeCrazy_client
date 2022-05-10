@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrafficLightManager : MonoBehaviour
+public class TrafficLightController : MonoBehaviour
 {
 
     [Header("Traffic Light")]
@@ -43,7 +43,7 @@ public class TrafficLightManager : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Car" && isRedLight){
             isWorking = false;
-            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
+            GameManager.Instance.GameOver();
             print(other.name);
             // print("빨간불에 진입하셨습니다.");
         }

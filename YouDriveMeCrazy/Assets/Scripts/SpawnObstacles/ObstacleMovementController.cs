@@ -30,8 +30,8 @@ public class ObstacleMovementController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Car"))
         {
-            // ³ªÁß¿¡ Ãæµ¹ È¿°ú Ãß°¡?
-            StartCoroutine(GameManager.Instance.GameOver());
+            // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½æµ¹ È¿ï¿½ï¿½ ï¿½ß°ï¿½?
+            GameManager.Instance.GameOver();
         }
     }
 }

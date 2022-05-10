@@ -45,6 +45,12 @@ MonoBehaviour:
   - RestartStage2
   - RestartStage1Scene
   - RestartStage2Scene
+  - RestartStageScene
+  - LeaveGame
+  - RestartScene
+  - ClearStage
+  - LeaveStage
+  - RestartStage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
