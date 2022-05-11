@@ -22,9 +22,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject gameOverPanel;
     #endregion
 
-    private static int clearNum;
+    private bool isGameEnd;
 
-    private int time;
+    private float currentStageClearTime;
+    private bool isTimerStop;
 
     void Awake(){
         if (Instance != null)
@@ -45,25 +46,55 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     // by 상민, stageClear, gameOver Panel 모두 SetAvtive(false)
     void Setup() {
+        print("game start@");
+        isGameEnd = false;
+
+        isTimerStop = false;
+        currentStageClearTime = 0;
+        
         if (stageClearPanel != null) {stageClearPanel.SetActive(false); }
         if (gameClearPanel != null) {gameClearPanel.SetActive(false); }
         if (gameOverPanel != null) {gameOverPanel.SetActive(false); }
     }
-    
-    public void StageClear(){
-        SavingData.presentStageNum += 1;
-        print("stage"+ SavingData.presentStageNum + " clear!!");
+
+    void Update()
+    {
+        if(!isGameEnd) {
+            currentStageClearTime += Time.deltaTime;
+        }
+    }
+
         // by상민, clearNum==2시 서버에 클리어 시간 인서트하고, 클리어 시간 표시 구현
         // 스테이지 1 클리어 시 리브&고넥스트
         // 스테이지 2 클리어 시 개인 점수 표시하고 리브만
         // 스코어보드는 타이틀에서만 볼 수 있음
-        if(SavingData.presentStageNum==3) { StartCoroutine(CallGameClear()); } else { StartCoroutine(CallStageClear()); }
+    public void StageClear(){
+        if(!isGameEnd){
+            isGameEnd = true;
+            print("stage"+ SavingData.presentStageNum + " clear!!");
+            print("You took" + currentStageClearTime + "minutes!");
+            SavingData.presentStageNum += 1;
+        
+            if(SavingData.presentStageNum==3){
+                float Stage1ClearTime = float.Parse(SavingData.timeReocrd);
+                SavingData.timeReocrd = (Stage1ClearTime + currentStageClearTime).ToString();
+                StartCoroutine(CallGameClear());
+            }
+            else {
+                SavingData.timeReocrd = currentStageClearTime.ToString();
+                StartCoroutine(CallStageClear());    
+            }
+        } 
     }
 
     public void GameOver()
     {
-        print("game over!!");
-        StartCoroutine(CallGameOver());
+        if(!isGameEnd){
+            isGameEnd = true;
+            currentStageClearTime = 0;
+            StartCoroutine(CallGameOver());
+        }
+
     }
 
     // by 상민, 플레이어 뒤에서 경찰차 소환 추가 필요
@@ -89,7 +120,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if(gameOverPanel != null) 
             gameOverPanel.SetActive(true);
     }
-
 
 
     // by 상민, 버튼 누른 사람이 방장&&현재 참가자 두명일 때 만 게임 재시작 가능
