@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         // Player 1
-        if (PhotonNetwork.IsMasterClient)
+        //if (PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKeyDown(brakeBtn)) {  isBreakPressing = true; }
             else if(Input.GetKeyUp(brakeBtn)) {  isBreakPressing = false; }
@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         //Player 2 
-        if (!PhotonNetwork.IsMasterClient)
+        //if (!PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKeyDown(accelBtn)) {  isAccelPressing = true; }
             else if(Input.GetKeyUp(accelBtn)) {  isAccelPressing = false; }
@@ -62,6 +62,17 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(klaxonBtn2)) {  isKlaxon2Pressing = true; }
             else if(Input.GetKeyUp(klaxonBtn2)) {  isKlaxon2Pressing = false; }
         }
+
+        CarController.carController.isBreakPressing = this.isBreakPressing;
+        CarController.carController.isLeftTurnPressing = this.isLeftTurnPressing;
+        CarController.carController.isLeftTurnSignalPressing = this.isLeftTurnSignalPressing;
+        CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
+        CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
+        CarController.carController.isAccelPressing = this.isAccelPressing;
+        CarController.carController.isRightTurnPressing = this.isRightTurnPressing;
+        CarController.carController.isGotoLeftWiperPressing = this.isGotoLeftWiperPressing;
+        CarController.carController.isGotoRightWiperPressing = this.isGotoRightWiperPressing;
+        CarController.carController.isKlaxon2Pressing = this.isKlaxon2Pressing;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

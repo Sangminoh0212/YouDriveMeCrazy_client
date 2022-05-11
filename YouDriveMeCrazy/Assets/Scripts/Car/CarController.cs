@@ -74,7 +74,6 @@ public class CarController : MonoBehaviourPunCallbacks//, IPunObservable
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
         carController = this;
 
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -187,49 +186,4 @@ public class CarController : MonoBehaviourPunCallbacks//, IPunObservable
             frontLeftCollider.brakeTorque = 0;
         }
     }
-
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    if (!PhotonNetwork.IsMasterClient)
-    //    {
-    //        if (stream.IsReading)
-    //        {
-    //            this.isAccelPressing = (bool)stream.ReceiveNext();
-    //            this.isRightTurnPressing = (bool)stream.ReceiveNext();
-    //            this.isGotoLeftWiperPressing = (bool)stream.ReceiveNext();
-    //            this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
-    //            this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
-    //        }
-
-    //        if (stream.IsWriting)
-    //        {
-    //            stream.SendNext(this.isBreakPressing);
-    //            stream.SendNext(this.isLeftTurnPressing);
-    //            stream.SendNext(this.isLeftTurnSignalPressing);
-    //            stream.SendNext(this.isRightTurnSignalPressing);
-    //            stream.SendNext(this.isKlaxon1Pressing);
-    //        }
-    //    }
-
-    //    if (PhotonNetwork.IsMasterClient)
-    //    {
-    //        if (stream.IsReading)
-    //        {
-    //            this.isBreakPressing = (bool)stream.ReceiveNext();
-    //            this.isLeftTurnPressing = (bool)stream.ReceiveNext();
-    //            this.isLeftTurnSignalPressing = (bool)stream.ReceiveNext();
-    //            this.isRightTurnSignalPressing = (bool)stream.ReceiveNext();
-    //            this.isKlaxon1Pressing = (bool)stream.ReceiveNext();
-    //        }
-
-    //        if (stream.IsWriting)
-    //        {
-    //            stream.SendNext(this.isAccelPressing);
-    //            stream.SendNext(this.isRightTurnPressing);
-    //            stream.SendNext(this.isGotoLeftWiperPressing);
-    //            stream.SendNext(this.isGotoRightWiperPressing);
-    //            stream.SendNext(this.isKlaxon2Pressing);
-    //        }
-    //    }
-    //}
 }
