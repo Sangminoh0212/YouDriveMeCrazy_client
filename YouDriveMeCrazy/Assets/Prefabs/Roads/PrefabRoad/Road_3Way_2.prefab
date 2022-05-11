@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 40, z: 1.0000004}
+  m_Size: {x: 1.0000002, y: 152.3, z: 1.0000004}
   m_Center: {x: -0.000000007450581, y: 20, z: 0.0000023841858}
 --- !u!114 &4977862097332114610
 MonoBehaviour:
@@ -262,7 +262,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 40, z: 1.0000004}
+  m_Size: {x: 1.0000002, y: 152.3, z: 1.0000004}
   m_Center: {x: -0.000000007450581, y: 20, z: 0.0000023841858}
 --- !u!114 &3520960702994220030
 MonoBehaviour:
@@ -556,7 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613135803245873389}
   m_Layer: 0
-  m_Name: Line_2
+  m_Name: LineMesh_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,7 +622,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 40, z: 1.0000004}
+  m_Size: {x: 1.0000002, y: 152.3, z: 1.0000004}
   m_Center: {x: -0.000000007450581, y: 20, z: 0.0000023841858}
 --- !u!114 &971851034934316159
 MonoBehaviour:
@@ -679,7 +679,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 40, z: 1.0000004}
+  m_Size: {x: 1.0000002, y: 152.3, z: 1.0000004}
   m_Center: {x: -0.000000007450581, y: 20, z: 0.0000023841858}
 --- !u!114 &8184444656970392055
 MonoBehaviour:
@@ -898,7 +898,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 40, z: 1.0000004}
+  m_Size: {x: 1.0000002, y: 152.3, z: 1.0000004}
   m_Center: {x: -0.000000007450581, y: 20, z: 0.0000023841858}
 --- !u!114 &6809700528645659060
 MonoBehaviour:
@@ -1130,7 +1130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2246333720091783906}
   m_Layer: 0
-  m_Name: Line_3
+  m_Name: LineMesh_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5463307913716626745}
   m_Layer: 0
-  m_Name: Line_1
+  m_Name: LineMesh_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
