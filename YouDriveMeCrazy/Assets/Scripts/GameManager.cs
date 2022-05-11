@@ -54,7 +54,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void StageClear(){
         clearNum++;
         print("stage"+ clearNum + " clear!!");
-        // by상민, clearNum==2시 스코어보드 불러야함
+        // by상민, clearNum==2시 서버에 클리어 시간 인서트하고, 클리어 시간 표시 구현
+        // 스테이지 1 클리어 시 리브&고넥스트
+        // 스테이지 2 클리어 시 개인 점수 표시하고 리브만
+        // 스코어보드는 타이틀에서만 볼 수 있음
         if(clearNum==2) { StartCoroutine(CallGameClear()); } else { StartCoroutine(CallStageClear()); }
     }
 
@@ -177,9 +180,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     #endregion
-
 }
 
-
-
-
+public static class SavingData
+{
+    public static string timeReocrd;
+    public static int presentStageNum;
+    public static string player1Name;
+    public static string player2Name;
+}

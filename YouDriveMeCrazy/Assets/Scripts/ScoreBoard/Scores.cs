@@ -11,6 +11,7 @@ namespace ScoreBoard
         [SerializeField] private string player1;
         [SerializeField] private string player2;
 
+        // To be string
         [SerializeField] private int points;
 
         public Scores(long scoresId, string player1, string player2, int points)

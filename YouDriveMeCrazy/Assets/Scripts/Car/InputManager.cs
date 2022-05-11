@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         // Player 1
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(brakeBtn)) {  isBreakPressing = true; }
             else {  isBreakPressing = false; }
@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         //Player 2 
-        if (PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             if (Input.GetKey(accelBtn)) {  isAccelPressing = true; }
             else {  isAccelPressing = false; }
@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (stream.IsReading)
             {
@@ -87,7 +87,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        if (PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             if (stream.IsReading)
             {
