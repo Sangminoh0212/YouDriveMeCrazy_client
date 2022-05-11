@@ -82,6 +82,10 @@ MonoBehaviour:
   - {fileID: 1766586324571697513, guid: f6f470aa5aad9482598a8bb5745b9d14, type: 3}
   - {fileID: 754664531788230549, guid: 7e23a4ab5228f4ee7b95e33d003c9308, type: 3}
   - {fileID: 9215803475113006296, guid: 72b63379e4d1446e38584f36e0ddea80, type: 3}
+  - {fileID: 3351542901968313842, guid: 921bbbbc114d51147b33267239301b43, type: 3}
+  - {fileID: 3092341295415984912, guid: 03ec80e1424cf52418c7bc7d58357512, type: 3}
+  - {fileID: 7587506433969445379, guid: b19be91cec58a9643b11948cb83416dd, type: 3}
+  - {fileID: 1938070240143601601, guid: ac8c24960f6cb33479d1b6d1d06bf5dc, type: 3}
   spawnObstacle: 0
   timer: 15
   speed: 5

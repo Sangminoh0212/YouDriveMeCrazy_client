@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObstacleMovementController : MonoBehaviour
 {
-    private float speed = 10;
-    private float timer;
+    private float speed = 3;
+    private float timer = 100000;
     private float passedTime;
 
 
@@ -30,7 +30,6 @@ public class ObstacleMovementController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Car"))
         {
-            // ���߿� �浹 ȿ�� �߰�?
             GameManager.Instance.GameOver();
         }
     }

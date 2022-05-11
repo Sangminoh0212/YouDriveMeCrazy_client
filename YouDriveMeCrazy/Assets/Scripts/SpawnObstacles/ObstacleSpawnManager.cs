@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Obstacles { Empty, Chicken, Doe, Fox, Horse, Man }
+public enum Obstacles { Empty, Chicken, Doe, Fox, Horse, Man, Bus, BlueCar, Van, Truck }
 
 public class ObstacleSpawnManager : MonoBehaviour
 {

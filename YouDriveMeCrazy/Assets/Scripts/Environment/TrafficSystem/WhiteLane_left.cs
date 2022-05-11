@@ -20,11 +20,11 @@ public class WhiteLane_left : MonoBehaviour
         {
             if(CarController.carController.isRightTurnSignalPressing){
                 this.isBtnTurnOn = true;
-                //print("왼쪽에서 진입");
+                print("왼쪽에서 진입");
             }
             else if (rightCollider.GetComponent<WhiteLane_right>().isBtnTurnOn)
             {
-                //print("오른쪽에서 왼쪽 깜빡이 키고 진입한거라 괜찮다.");
+                print("오른쪽에서 왼쪽 깜빡이 키고 진입한거라 괜찮다.");
                 return;
             }
             else{
@@ -45,7 +45,7 @@ public class WhiteLane_left : MonoBehaviour
             
             this.isBtnTurnOn = false;
             rightCollider.GetComponent<WhiteLane_right>().isBtnTurnOn = false;
-            //print("왼쪽으로 탈출");
+            print("왼쪽으로 탈출");
         }  
     }
 }

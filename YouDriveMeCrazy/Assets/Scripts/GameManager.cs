@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void GameOver()
     {
         if(!isGameEnd){
+            print("GameOver");
             isGameEnd = true;
             currentStageClearTime = 0;
             StartCoroutine(CallGameOver());

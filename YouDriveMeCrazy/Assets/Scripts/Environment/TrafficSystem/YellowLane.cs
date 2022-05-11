@@ -12,8 +12,7 @@ public class YellowLane : MonoBehaviour
     }
     
     private void OnTriggerEnter(Collider other) {
-
-            if(other.tag == "Car"){
+        if (other.tag == "Car"){
             // by 상민, 자동차 속도 천천히 줄이기 필요
             GameManager.Instance.GameOver();
             this.GetComponent<Collider>().enabled = false;
