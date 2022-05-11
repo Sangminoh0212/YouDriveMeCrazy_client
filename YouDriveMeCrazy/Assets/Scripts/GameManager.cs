@@ -9,6 +9,15 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
+public static class SavingData
+{
+    public static string timeReocrd;
+    public static int presentStageNum;
+    public static string player1Name;
+    public static string player2Name;
+}
+
+
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance;
@@ -197,12 +206,3 @@ public class GameManager : MonoBehaviourPunCallbacks
     #endregion
 }
 
-public static class SavingData
-{
-    public static string timeReocrd;
-    public static int presentStageNum;
-    public static string player1Name;
-    public static string player2Name;
-
-
-}
