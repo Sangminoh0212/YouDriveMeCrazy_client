@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
-public enum GameState {Clear, Restart, Leave}
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -52,13 +51,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     
     public void StageClear(){
-        clearNum++;
-        print("stage"+ clearNum + " clear!!");
+        SavingData.presentStageNum += 1;
+        print("stage"+ SavingData.presentStageNum + " clear!!");
         // by상민, clearNum==2시 서버에 클리어 시간 인서트하고, 클리어 시간 표시 구현
         // 스테이지 1 클리어 시 리브&고넥스트
         // 스테이지 2 클리어 시 개인 점수 표시하고 리브만
         // 스코어보드는 타이틀에서만 볼 수 있음
-        if(clearNum==2) { StartCoroutine(CallGameClear()); } else { StartCoroutine(CallStageClear()); }
+        if(SavingData.presentStageNum==3) { StartCoroutine(CallGameClear()); } else { StartCoroutine(CallStageClear()); }
     }
 
     public void GameOver()
@@ -93,20 +92,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
 
-
-    // by 상민 내일 민호형한테 물어보기
-    public void MoveScene(GameState gameState)
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-            {
-                PhotonView photonView = PhotonView.Get(this);
-                photonView.RPC(gameState.ToString(), RpcTarget.All);
-            }
-        }
-    }
-
     // by 상민, 버튼 누른 사람이 방장&&현재 참가자 두명일 때 만 게임 재시작 가능
     // photonView.RPC 를 이용해 Master, client 모두 RestartStage1Scene() 호출
     public void Next()
@@ -137,7 +122,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // photonView.RPC 를 이용해 Master, client 모두 LeaveGame() 호출
     public void Leave()
     {
-        clearNum = 0;
+        SavingData.presentStageNum = 1;
         if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
@@ -188,4 +173,6 @@ public static class SavingData
     public static int presentStageNum;
     public static string player1Name;
     public static string player2Name;
+
+
 }
