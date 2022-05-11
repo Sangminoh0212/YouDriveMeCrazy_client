@@ -1716,8 +1716,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2111181815}
-        m_TargetAssemblyTypeName: WaitingRoom, Assembly-CSharp
-        m_MethodName: Enter
+        m_TargetAssemblyTypeName: Photon.WaitingRoom, Assembly-CSharp
+        m_MethodName: RandomEnter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
