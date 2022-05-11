@@ -28,39 +28,39 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
         // Player 1
         if (PhotonNetwork.IsMasterClient)
         {
-            if (Input.GetKey(brakeBtn)) {  isBreakPressing = true; }
-            else {  isBreakPressing = false; }
+            if (Input.GetKeyDown(brakeBtn)) {  isBreakPressing = true; }
+            else if(Input.GetKeyUp(brakeBtn)) {  isBreakPressing = false; }
 
-            if (Input.GetKey(leftTurnBtn)) {  isLeftTurnPressing = true; }
-            else {  isLeftTurnPressing = false; }
+            if (Input.GetKeyDown(leftTurnBtn)) {  isLeftTurnPressing = true; }
+            else if(Input.GetKeyUp(leftTurnBtn)) {  isLeftTurnPressing = false; }
 
-            if (Input.GetKey(leftTurnSignalBtn)) {  isLeftTurnSignalPressing = true; }
-            else {  isLeftTurnSignalPressing = false; }
+            if (Input.GetKeyDown(leftTurnSignalBtn)) {  isLeftTurnSignalPressing = true; }
+            else if(Input.GetKeyUp(leftTurnSignalBtn)) {  isLeftTurnSignalPressing = false; }
 
-            if (Input.GetKey(rightTurnSignalBtn)) {  isRightTurnSignalPressing = true; }
-            else {  isRightTurnSignalPressing = false; }
+            if (Input.GetKeyDown(rightTurnSignalBtn)) {  isRightTurnSignalPressing = true; }
+            else if(Input.GetKeyUp(rightTurnSignalBtn)) {  isRightTurnSignalPressing = false; }
 
-            if (Input.GetKey(klaxonBtn1)) {  isKlaxon1Pressing = true; }
-            else {  isKlaxon1Pressing = false; }
+            if (Input.GetKeyDown(klaxonBtn1)) {  isKlaxon1Pressing = true; }
+            else if(Input.GetKeyUp(klaxonBtn1)) {  isKlaxon1Pressing = false; }
         }
 
         //Player 2 
         if (!PhotonNetwork.IsMasterClient)
         {
-            if (Input.GetKey(accelBtn)) {  isAccelPressing = true; }
-            else {  isAccelPressing = false; }
+            if (Input.GetKeyDown(accelBtn)) {  isAccelPressing = true; }
+            else if(Input.GetKeyUp(accelBtn)) {  isAccelPressing = false; }
 
-            if (Input.GetKey(rightTurnBtn)) {  isRightTurnPressing = true; }
-            else{  isRightTurnPressing = false; }
+            if (Input.GetKeyDown(rightTurnBtn)) {  isRightTurnPressing = true; }
+            else if(Input.GetKeyUp(rightTurnBtn)){  isRightTurnPressing = false; }
 
-            if (Input.GetKey(gotoLeftWiperBtn)) {  isGotoLeftWiperPressing = true; }
-            else {  isGotoLeftWiperPressing = false; }
+            if (Input.GetKeyDown(gotoLeftWiperBtn)) {  isGotoLeftWiperPressing = true; }
+            else if(Input.GetKeyUp(gotoLeftWiperBtn)) {  isGotoLeftWiperPressing = false; }
 
-            if (Input.GetKey(gotoRightWiperBtn)) {  isGotoRightWiperPressing = true; }
-            else {  isGotoRightWiperPressing = false; }
+            if (Input.GetKeyDown(gotoRightWiperBtn)) {  isGotoRightWiperPressing = true; }
+            else if(Input.GetKeyUp(gotoRightWiperBtn)) {  isGotoRightWiperPressing = false; }
 
-            if (Input.GetKey(klaxonBtn2)) {  isKlaxon2Pressing = true; }
-            else {  isKlaxon2Pressing = false; }
+            if (Input.GetKeyDown(klaxonBtn2)) {  isKlaxon2Pressing = true; }
+            else if(Input.GetKeyUp(klaxonBtn2)) {  isKlaxon2Pressing = false; }
         }
     }
 
