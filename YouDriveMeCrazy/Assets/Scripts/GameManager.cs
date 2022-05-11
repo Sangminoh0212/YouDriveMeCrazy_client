@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
+[Serializable]
 public enum GameState {Clear, Restart, Leave}
 
 public class GameManager : MonoBehaviourPunCallbacks
