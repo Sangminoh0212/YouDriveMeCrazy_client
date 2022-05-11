@@ -10,23 +10,25 @@ public class WhiteLane_right : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<ClickMovement>().leftBtn)
-        {
-            this.isBtnTurnOn = true;
-            //print("오른쪽에서 진입");
-        }
-        else if (leftCollider.GetComponent<WhiteLane_left>().isBtnTurnOn)
-        {
-            //print("왼쪽에서 오른쪽 깜빡이 키고 진입한거라 괜찮다.");
-            return;
-        }
-        else
-        {
-            // by 상민, 자동차 속도 천천히 줄이기 필요
-            GameManager.Instance.StartCoroutine(GameManager.Instance.GameOver());
-            this.GetComponent<Collider>().enabled = false;
-            leftCollider.GetComponent<Collider>().enabled = false;
-            //print("오른쪽 콜라이더에서 신호위반 걸림. 게임 오버");
+        if (other.tag == "Car"){
+            if (CarController.carController.isLeftTurnSignalPressing)
+            {
+                this.isBtnTurnOn = true;
+                //print("오른쪽에서 진입");
+            }
+            else if (leftCollider.GetComponent<WhiteLane_left>().isBtnTurnOn)
+            {
+                //print("왼쪽에서 오른쪽 깜빡이 키고 진입한거라 괜찮다.");
+                return;
+            }
+            else
+            {
+                // by 상민, 자동차 속도 천천히 줄이기 필요
+                GameManager.Instance.GameOver();
+                this.GetComponent<Collider>().enabled = false;
+                leftCollider.GetComponent<Collider>().enabled = false;
+                //print("오른쪽 콜라이더에서 신호위반 걸림. 게임 오버");
+            }
         }
     }
 
@@ -40,7 +42,7 @@ public class WhiteLane_right : MonoBehaviour
 
             this.isBtnTurnOn = false;
             leftCollider.GetComponent<WhiteLane_left>().isBtnTurnOn = false;
-            print("오른쪽으로 탈출");
+            //print("오른쪽으로 탈출");
         }
     }
 }

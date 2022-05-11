@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 724258920742697109}
   m_Layer: 3
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,7 +298,6 @@ MonoBehaviour:
   OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 724258920742697111}
   - {fileID: 724258920742697106}
   - {fileID: 724258920742697109}
   sceneViewId: 0

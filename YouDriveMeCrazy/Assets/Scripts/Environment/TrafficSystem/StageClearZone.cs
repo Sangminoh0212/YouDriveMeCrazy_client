@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossroadDangerousZone : MonoBehaviour
+public class StageClearZone : MonoBehaviour
 {
     void Start()
     {    
@@ -13,7 +13,7 @@ public class CrossroadDangerousZone : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.StageClear();
             this.gameObject.GetComponent<Collider>().enabled = false;
         }
     }

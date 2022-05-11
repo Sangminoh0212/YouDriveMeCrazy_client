@@ -152,7 +152,7 @@ namespace Photon
             {
                 if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
                 {
-                    PhotonNetwork.LoadLevel("Minho_DriveCar");
+                    PhotonNetwork.LoadLevel(1);
                 }
                 else
                 {
