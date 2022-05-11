@@ -51,6 +51,9 @@ MonoBehaviour:
   - ClearStage
   - LeaveStage
   - RestartStage
+  - SyncLeaveStage
+  - SyncNextStage
+  - SyncRestartStage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
