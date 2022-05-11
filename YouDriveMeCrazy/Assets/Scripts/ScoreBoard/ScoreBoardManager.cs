@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ScoreBoard;
 using TMPro;
 using UnityEngine;
+using Api;
 using UnityEngine.Networking;
 
 public class ScoreBoardManager : MonoBehaviour
@@ -14,11 +16,15 @@ public class ScoreBoardManager : MonoBehaviour
     private Scores[] scoreList;
 
     #endregion
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        StartCoroutine(LoadScores());
+        StartCoroutine(Api.Api.LoadScores((data) =>
+        {
+            scoreList = data;
+            
+            PrintScore();
+        }));
 
         Scores[] scores = {new Scores(1, "kim", "park", 100)};
         ScoresResDto scoresResDto = new ScoresResDto(scores);
@@ -27,18 +33,8 @@ public class ScoreBoardManager : MonoBehaviour
         
         Debug.Log(json);
     }
-// Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     #region private methods
-
-    private ScoresResDto JsonToScoresResDto(string json)
-    {
-        return JsonUtility.FromJson<ScoresResDto>(json);
-    }
 
     private void PrintScore()
     {
@@ -56,28 +52,14 @@ public class ScoreBoardManager : MonoBehaviour
 
     #endregion
 
-    #region Coroutine
+    #region Public Methods
 
-    IEnumerator LoadScores()
+    public void InsertScore()
     {
-        string url = "http://localhost:8080/scores";
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        StartCoroutine(Api.Api.InsertScore("Lee", "Choi", 150, scores =>
         {
-            yield return www.SendWebRequest();
-            if (www.isDone)
-            {
-                string result = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                
-                // result = "{\"Items\":" + result + "}";
-
-                Debug.Log(result);
-                Debug.Log(JsonToScoresResDto(result).data == null);
-
-                scoreList = JsonToScoresResDto(result).data;
-                
-                PrintScore();
-            }
-        }
+            Debug.Log(scores.ToString());
+        }));
     }
 
     #endregion
