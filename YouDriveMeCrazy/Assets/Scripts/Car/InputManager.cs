@@ -75,6 +75,12 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 this.isGotoLeftWiperPressing = (bool)stream.ReceiveNext();
                 this.isGotoRightWiperPressing = (bool)stream.ReceiveNext();
                 this.isKlaxon2Pressing = (bool)stream.ReceiveNext();
+
+                CarController.carController.isAccelPressing = this.isAccelPressing;
+                CarController.carController.isRightTurnPressing = this.isRightTurnPressing;
+                CarController.carController.isGotoLeftWiperPressing = this.isGotoLeftWiperPressing;
+                CarController.carController.isGotoRightWiperPressing = this.isGotoRightWiperPressing;
+                CarController.carController.isKlaxon2Pressing = this.isKlaxon2Pressing;
             }
 
             if (stream.IsWriting)
@@ -84,6 +90,12 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(this.isLeftTurnSignalPressing);
                 stream.SendNext(this.isRightTurnSignalPressing);
                 stream.SendNext(this.isKlaxon1Pressing);
+
+                CarController.carController.isBreakPressing = this.isBreakPressing;
+                CarController.carController.isLeftTurnPressing = this.isLeftTurnPressing;
+                CarController.carController.isLeftTurnSignalPressing = this.isLeftTurnSignalPressing;
+                CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
+                CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
             }
         }
 
@@ -96,6 +108,12 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 this.isLeftTurnSignalPressing = (bool)stream.ReceiveNext();
                 this.isRightTurnSignalPressing = (bool)stream.ReceiveNext();
                 this.isKlaxon1Pressing = (bool)stream.ReceiveNext();
+
+                CarController.carController.isBreakPressing = this.isBreakPressing;
+                CarController.carController.isLeftTurnPressing = this.isLeftTurnPressing;
+                CarController.carController.isLeftTurnSignalPressing = this.isLeftTurnSignalPressing;
+                CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
+                CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
             }
 
             if (stream.IsWriting)
@@ -105,19 +123,13 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 stream.SendNext(this.isGotoLeftWiperPressing);
                 stream.SendNext(this.isGotoRightWiperPressing);
                 stream.SendNext(this.isKlaxon2Pressing);
+
+                CarController.carController.isAccelPressing = this.isAccelPressing;
+                CarController.carController.isRightTurnPressing = this.isRightTurnPressing;
+                CarController.carController.isGotoLeftWiperPressing = this.isGotoLeftWiperPressing;
+                CarController.carController.isGotoRightWiperPressing = this.isGotoRightWiperPressing;
+                CarController.carController.isKlaxon2Pressing = this.isKlaxon2Pressing;
             }
         }
-
-        CarController.carController.isBreakPressing = this.isBreakPressing;
-        CarController.carController.isLeftTurnPressing = this.isLeftTurnPressing;
-        CarController.carController.isLeftTurnSignalPressing = this.isLeftTurnSignalPressing;
-        CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
-        CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
-
-        CarController.carController.isAccelPressing = this.isAccelPressing;
-        CarController.carController.isRightTurnPressing = this.isRightTurnPressing;
-        CarController.carController.isGotoLeftWiperPressing = this.isGotoLeftWiperPressing;
-        CarController.carController.isGotoRightWiperPressing = this.isGotoRightWiperPressing;
-        CarController.carController.isKlaxon2Pressing = this.isKlaxon2Pressing;
     }
 }
