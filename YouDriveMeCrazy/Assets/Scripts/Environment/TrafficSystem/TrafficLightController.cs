@@ -44,8 +44,6 @@ public class TrafficLightController : MonoBehaviour
         if(other.tag == "Car" && isRedLight){
             isWorking = false;
             GameManager.Instance.GameOver();
-            print(other.name);
-            // print("빨간불에 진입하셨습니다.");
         }
     }
 

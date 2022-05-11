@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance;
 
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private GameObject inputManager;
 
     #region UI
     private GameObject ui;
     [SerializeField] private GameObject stageClearPanel;
+    [SerializeField] private GameObject gameClearPanel;
     [SerializeField] private GameObject gameOverPanel;
     #endregion
 
@@ -39,32 +40,46 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         Setup();
-        //PhotonNetwork.Instantiate(inputManager.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(inputManager.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
     }
 
 
     // by 상민, stageClear, gameOver Panel 모두 SetAvtive(false)
     void Setup() {
-        if (GameObject.Find("InputManager")) inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-
-        if (stageClearPanel != null) stageClearPanel.SetActive(false);
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (stageClearPanel != null) {stageClearPanel.SetActive(false); }
+        if (gameClearPanel != null) {gameClearPanel.SetActive(false); }
+        if (gameOverPanel != null) {gameOverPanel.SetActive(false); }
     }
     
-    public void GameOver(){
+    public void StageClear(){
+        clearNum++;
+        print("stage"+ clearNum + " clear!!");
+        // by상민, clearNum==2시 스코어보드 불러야함
+        if(clearNum==2) { StartCoroutine(CallGameClear()); } else { StartCoroutine(CallStageClear()); }
+    }
+
+    public void GameOver()
+    {
         print("game over!!");
         StartCoroutine(CallGameOver());
     }
 
-    public void StageClear(){
-        clearNum++;
-        print("stage clear!!");
-        // by상민, clearNum==2시 스코어보드 불러야함
-        if(clearNum==2) { StartCoroutine(CallStageClear()); } else { StartCoroutine(CallStageClear()); }
-    }
-
     // by 상민, 플레이어 뒤에서 경찰차 소환 추가 필요
     // 다른 클래스에서 GameManager.Instance.GameOver() 호출해서 게임 오버 시키면 경찰차 등장 후 @초 후에 GameOverPanel 활성화
+    public IEnumerator CallStageClear()
+    {
+        yield return new WaitForSeconds(2f);
+        if (stageClearPanel != null)
+        { stageClearPanel.SetActive(true); }
+    }
+
+    public IEnumerator CallGameClear()
+    {
+        yield return new WaitForSeconds(2f);
+        if (gameClearPanel != null)
+        { gameClearPanel.SetActive(true); }
+    }
+    
     public IEnumerator CallGameOver()
     {
         // by 상민, 경찰차 소환 필요
@@ -73,11 +88,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             gameOverPanel.SetActive(true);
     }
 
-    public IEnumerator CallStageClear(){
-        yield return new WaitForSeconds(2f);
-        if (stageClearPanel != null) 
-        {stageClearPanel.SetActive(true); }
-    }
+
 
 
     // by 상민 내일 민호형한테 물어보기
@@ -102,7 +113,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
                 PhotonView photonView = PhotonView.Get(this);
-                photonView.RPC("SyncClearStage", RpcTarget.All);
+                photonView.RPC("SyncNextStage", RpcTarget.All);
             }
         }
     }
@@ -123,6 +134,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // photonView.RPC 를 이용해 Master, client 모두 LeaveGame() 호출
     public void Leave()
     {
+        clearNum = 0;
         if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)

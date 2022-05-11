@@ -84,7 +84,7 @@ public class CarController : MonoBehaviourPunCallbacks//, IPunObservable
     void Update()
     {
         calculateInput();
-        //updateUI();
+        updateUI();
 
         UpdateWheelPhysics();
         UpdateWheelTransforms();

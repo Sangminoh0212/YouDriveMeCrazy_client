@@ -9,7 +9,7 @@ public class WhiteLane_left : MonoBehaviour
     [HideInInspector] public bool isBtnTurnOn = false;
 
     private void Start() {
-        transform.parent.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //transform.parent.gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
 
@@ -18,7 +18,7 @@ public class WhiteLane_left : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag=="Car")
         {
-            if(other.GetComponent<ClickMovement>().rightBtn){
+            if(CarController.carController.isRightTurnSignalPressing){
                 this.isBtnTurnOn = true;
                 //print("왼쪽에서 진입");
             }
@@ -45,7 +45,7 @@ public class WhiteLane_left : MonoBehaviour
             
             this.isBtnTurnOn = false;
             rightCollider.GetComponent<WhiteLane_right>().isBtnTurnOn = false;
-            print("왼쪽으로 탈출");
+            //print("왼쪽으로 탈출");
         }  
     }
 }

@@ -8,7 +8,7 @@ public class YellowLane : MonoBehaviour
     private void Start()
     {
         // by 상민, 노란선은 투명하게 안할거면 이 부분 지우면 됩니다.
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
     
     private void OnTriggerEnter(Collider other) {

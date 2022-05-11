@@ -6,7 +6,7 @@ public class StageClearZone : MonoBehaviour
 {
     void Start()
     {    
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
