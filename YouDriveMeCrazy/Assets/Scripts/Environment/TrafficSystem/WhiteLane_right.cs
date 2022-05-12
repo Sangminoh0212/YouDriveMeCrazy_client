@@ -28,6 +28,7 @@ public class WhiteLane_right : MonoBehaviour
             }
             else
             {
+                print("오른콜라이더 흰색차선 충돌");
                 // by 상민, 자동차 속도 천천히 줄이기 필요
                 GameManager.Instance.GameOver();
                 this.GetComponent<Collider>().enabled = false;
