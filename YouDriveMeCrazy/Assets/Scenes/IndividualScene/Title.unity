@@ -241,7 +241,7 @@ MonoBehaviour:
   mainMenuHolder: {fileID: 1279753431}
   optionMenuHolder: {fileID: 2050013342}
   scoreMenuHolder: {fileID: 2015300726}
-  SceneToLoad: DriveCar
+  SceneToLoad: WaitingRoom
   SceneToLoad2: OptionScreen
   SceneToLoad3: ScoreBoardScreen
 --- !u!1 &234906489

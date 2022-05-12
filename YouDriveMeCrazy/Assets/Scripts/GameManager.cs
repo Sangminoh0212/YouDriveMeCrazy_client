@@ -25,16 +25,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject inputManager;
 
     #region UI
-    private GameObject ui;
     [SerializeField] private GameObject stageClearPanel;
     [SerializeField] private GameObject gameClearPanel;
     [SerializeField] private GameObject gameOverPanel;
     #endregion
 
     private bool isGameEnd;
-
     private float currentStageClearTime;
-    private bool isTimerStop;
 
     void Awake(){
         if (Instance != null)
@@ -53,12 +50,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
-    // by 상민, stageClear, gameOver Panel 모두 SetAvtive(false)
     void Setup() {
-        print("game start@");
+        print("Stage" + SavingData.presentStageNum + " Start!");
         isGameEnd = false;
-
-        isTimerStop = false;
         currentStageClearTime = 0;
         
         if (stageClearPanel != null) {stageClearPanel.SetActive(false); }
@@ -82,9 +76,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             isGameEnd = true;
             print("stage"+ SavingData.presentStageNum + " clear!!");
             print("You took" + currentStageClearTime + "minutes!");
-            SavingData.presentStageNum += 1;
-        
-            if(SavingData.presentStageNum==3){
+
+            if(SavingData.presentStageNum==2){
                 float Stage1ClearTime = float.Parse(SavingData.timeReocrd);
                 SavingData.timeReocrd = (Stage1ClearTime + currentStageClearTime).ToString();
                 StartCoroutine(CallGameClear());
@@ -136,6 +129,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // photonView.RPC 를 이용해 Master, client 모두 RestartStage1Scene() 호출
     public void Next()
     {
+        SavingData.presentStageNum += 1;
         if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
@@ -195,7 +189,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void SyncLeaveStage(){
         PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer.ActorNumber);
-        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.LoadLevel(1);
     }
 
     // by 상민, 방 나가면 자동으로 호출

@@ -8,8 +8,8 @@ public class Title : MonoBehaviour
     public GameObject optionMenuHolder;
     public GameObject scoreMenuHolder;
 
-     public string SceneToLoad;
-     public string SceneToLoad2;
+    public string SceneToLoad;
+    public string SceneToLoad2;
     public string SceneToLoad3;
 
      void Start() {
