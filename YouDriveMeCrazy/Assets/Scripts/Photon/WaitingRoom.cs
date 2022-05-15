@@ -150,6 +150,16 @@ namespace Photon
             
             if (PhotonNetwork.IsMasterClient)
             {
+                // Cheat
+                if (Input.GetKey(KeyCode.F1))
+                {
+                    Player[] playerList = PhotonNetwork.PlayerList;
+                    SavingData.player1Name = playerList[0].NickName;
+                    //SavingData.player2Name = playerList[1].NickName;
+                    SavingData.presentStageNum = 1;
+                    PhotonNetwork.LoadLevel(2);
+                }
+
                 if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
                 {
                     Player[] playerList = PhotonNetwork.PlayerList;

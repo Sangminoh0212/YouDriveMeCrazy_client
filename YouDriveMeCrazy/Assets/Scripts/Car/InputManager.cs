@@ -22,26 +22,74 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [HideInInspector] public bool isGotoRightWiperPressing;
     [HideInInspector] public bool isKlaxon2Pressing;
 
+    // Cheat
+    private bool isCheatMode = false;
+    private float cheatTimer;
+
     // Update is called once per frame
     void Update()
     {
         // Player 1
         if (PhotonNetwork.IsMasterClient)
         {
-            if (Input.GetKeyDown(brakeBtn)) {  isBreakPressing = true; }
-            else if(Input.GetKeyUp(brakeBtn)) {  isBreakPressing = false; }
+            if (Input.GetKeyDown(brakeBtn)) { isBreakPressing = true; }
+            else if (Input.GetKeyUp(brakeBtn)) { isBreakPressing = false; }
 
-            if (Input.GetKeyDown(leftTurnBtn)) {  isLeftTurnPressing = true; }
-            else if(Input.GetKeyUp(leftTurnBtn)) {  isLeftTurnPressing = false; }
+            if (Input.GetKeyDown(leftTurnBtn)) { isLeftTurnPressing = true; }
+            else if (Input.GetKeyUp(leftTurnBtn)) { isLeftTurnPressing = false; }
 
-            if (Input.GetKeyDown(leftTurnSignalBtn)) {  isLeftTurnSignalPressing = true; }
-            else if(Input.GetKeyUp(leftTurnSignalBtn)) {  isLeftTurnSignalPressing = false; }
+            if (Input.GetKeyDown(leftTurnSignalBtn)) { isLeftTurnSignalPressing = true; }
+            else if (Input.GetKeyUp(leftTurnSignalBtn)) { isLeftTurnSignalPressing = false; }
 
-            if (Input.GetKeyDown(rightTurnSignalBtn)) {  isRightTurnSignalPressing = true; }
-            else if(Input.GetKeyUp(rightTurnSignalBtn)) {  isRightTurnSignalPressing = false; }
+            if (Input.GetKeyDown(rightTurnSignalBtn)) { isRightTurnSignalPressing = true; }
+            else if (Input.GetKeyUp(rightTurnSignalBtn)) { isRightTurnSignalPressing = false; }
 
-            if (Input.GetKeyDown(klaxonBtn1)) {  isKlaxon1Pressing = true; }
-            else if(Input.GetKeyUp(klaxonBtn1)) {  isKlaxon1Pressing = false; }
+            if (Input.GetKeyDown(klaxonBtn1)) { isKlaxon1Pressing = true; }
+            else if (Input.GetKeyUp(klaxonBtn1)) { isKlaxon1Pressing = false; }
+
+
+            // Cheat
+            if (Input.GetKey(KeyCode.F1))
+            {
+                cheatTimer += Time.deltaTime;
+                if (cheatTimer > 2f)
+                {
+                    Debug.Log("Cheat mode on");
+                    isCheatMode = !isCheatMode;
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.F1))
+            {
+                cheatTimer = 0;
+            }
+
+            if (isCheatMode) {
+                if (Input.GetKeyDown(accelBtn)) { isAccelPressing = true; }
+                else if (Input.GetKeyUp(accelBtn)) { isAccelPressing = false; }
+
+                if (Input.GetKeyDown(rightTurnBtn)) { isRightTurnPressing = true; }
+                else if (Input.GetKeyUp(rightTurnBtn)) { isRightTurnPressing = false; }
+
+                if (Input.GetKeyDown(gotoLeftWiperBtn)) { isGotoLeftWiperPressing = true; }
+                else if (Input.GetKeyUp(gotoLeftWiperBtn)) { isGotoLeftWiperPressing = false; }
+
+                if (Input.GetKeyDown(gotoRightWiperBtn)) { isGotoRightWiperPressing = true; }
+                else if (Input.GetKeyUp(gotoRightWiperBtn)) { isGotoRightWiperPressing = false; }
+
+                if (Input.GetKeyDown(klaxonBtn2)) { isKlaxon2Pressing = true; }
+                else if (Input.GetKeyUp(klaxonBtn2)) { isKlaxon2Pressing = false; }
+
+                CarController.carController.isAccelPressing = this.isAccelPressing;
+                CarController.carController.isRightTurnPressing = this.isRightTurnPressing;
+                CarController.carController.isGotoLeftWiperPressing = this.isGotoLeftWiperPressing;
+                CarController.carController.isGotoRightWiperPressing = this.isGotoRightWiperPressing;
+                CarController.carController.isKlaxon2Pressing = this.isKlaxon2Pressing;
+                CarController.carController.isBreakPressing = this.isBreakPressing;
+                CarController.carController.isLeftTurnPressing = this.isLeftTurnPressing;
+                CarController.carController.isLeftTurnSignalPressing = this.isLeftTurnSignalPressing;
+                CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
+                CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
+            }
         }
 
         //Player 2 
