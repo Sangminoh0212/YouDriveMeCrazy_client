@@ -1292,6 +1292,10 @@ PrefabInstance:
       value: 'Car '
       objectReference: {fileID: 0}
     - target: {fileID: 6946875041595037231, guid: 619715deb3aec214c98c63e3040ca4d5, type: 3}
+      propertyPath: steerAngle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6946875041595037231, guid: 619715deb3aec214c98c63e3040ca4d5, type: 3}
       propertyPath: engineForce
       value: 200
       objectReference: {fileID: 0}

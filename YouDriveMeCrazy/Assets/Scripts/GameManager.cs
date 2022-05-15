@@ -9,9 +9,10 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
+
 public static class SavingData
 {
-    public static string timeReocrd;
+    public static string timeReocrd = "0";
     public static int presentStageNum;
     public static string player1Name;
     public static string player2Name;
@@ -62,7 +63,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if(!isGameEnd) {
+        #region Check Cheat Mode
+        Cheat.updateCheatState();
+        #endregion
+
+        if (!isGameEnd) {
             currentStageClearTime += Time.deltaTime;
         }
     }
@@ -75,9 +80,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         if(!isGameEnd){
             isGameEnd = true;
             print("stage"+ SavingData.presentStageNum + " clear!!");
-            print("You took" + currentStageClearTime + "minutes!");
+            print("You took" + currentStageClearTime + "seconds!");
 
-            if(SavingData.presentStageNum==2){
+            if(SavingData.presentStageNum== 2)
+            {
                 float Stage1ClearTime = float.Parse(SavingData.timeReocrd);
                 SavingData.timeReocrd = (Stage1ClearTime + currentStageClearTime).ToString();
                 StartCoroutine(CallGameClear());
@@ -132,7 +138,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         SavingData.presentStageNum += 1;
         if (PhotonNetwork.IsMasterClient)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 || Cheat.cheatMode)
             {
                 PhotonView photonView = PhotonView.Get(this);
                 photonView.RPC("SyncNextStage", RpcTarget.All);
@@ -145,7 +151,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void Restart()
     {
         if (PhotonNetwork.IsMasterClient){
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2){
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 || Cheat.cheatMode)
+            {
                 PhotonView photonView = PhotonView.Get(this);
                 photonView.RPC("SyncRestartStage", RpcTarget.All);
             }
@@ -159,7 +166,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         SavingData.presentStageNum = 1;
         if (PhotonNetwork.IsMasterClient)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 || Cheat.cheatMode)
             {
                 PhotonView photonView = PhotonView.Get(this);
                 photonView.RPC("SyncLeaveStage", RpcTarget.All);

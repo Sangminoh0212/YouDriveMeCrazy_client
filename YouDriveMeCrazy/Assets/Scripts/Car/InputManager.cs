@@ -22,9 +22,6 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
     [HideInInspector] public bool isGotoRightWiperPressing;
     [HideInInspector] public bool isKlaxon2Pressing;
 
-    // Cheat
-    private bool isCheatMode = false;
-    private float cheatTimer;
 
     // Update is called once per frame
     void Update()
@@ -48,33 +45,19 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
             else if (Input.GetKeyUp(klaxonBtn1)) { isKlaxon1Pressing = false; }
 
 
-            // Cheat
-            if (Input.GetKey(KeyCode.F1))
-            {
-                cheatTimer += Time.deltaTime;
-                if (cheatTimer > 2f)
-                {
-                    Debug.Log("Cheat mode on");
-                    isCheatMode = !isCheatMode;
-                }
-            }
-            else if (Input.GetKeyUp(KeyCode.F1))
-            {
-                cheatTimer = 0;
-            }
-
-            if (isCheatMode) {
+            #region Cheat mode
+            if (Cheat.cheatMode) {
                 if (Input.GetKeyDown(accelBtn)) { isAccelPressing = true; }
                 else if (Input.GetKeyUp(accelBtn)) { isAccelPressing = false; }
 
                 if (Input.GetKeyDown(rightTurnBtn)) { isRightTurnPressing = true; }
                 else if (Input.GetKeyUp(rightTurnBtn)) { isRightTurnPressing = false; }
 
-                if (Input.GetKeyDown(gotoLeftWiperBtn)) { isGotoLeftWiperPressing = true; }
-                else if (Input.GetKeyUp(gotoLeftWiperBtn)) { isGotoLeftWiperPressing = false; }
+                if (Input.GetKeyDown(KeyCode.Q)) { isGotoLeftWiperPressing = true; }
+                else if (Input.GetKeyUp(KeyCode.Q)) { isGotoLeftWiperPressing = false; }
 
-                if (Input.GetKeyDown(gotoRightWiperBtn)) { isGotoRightWiperPressing = true; }
-                else if (Input.GetKeyUp(gotoRightWiperBtn)) { isGotoRightWiperPressing = false; }
+                if (Input.GetKeyDown(KeyCode.E)) { isGotoRightWiperPressing = true; }
+                else if (Input.GetKeyUp(KeyCode.E)) { isGotoRightWiperPressing = false; }
 
                 if (Input.GetKeyDown(klaxonBtn2)) { isKlaxon2Pressing = true; }
                 else if (Input.GetKeyUp(klaxonBtn2)) { isKlaxon2Pressing = false; }
@@ -90,6 +73,7 @@ public class InputManager : MonoBehaviourPunCallbacks, IPunObservable
                 CarController.carController.isRightTurnSignalPressing = this.isRightTurnSignalPressing;
                 CarController.carController.isKlaxon1Pressing = this.isKlaxon1Pressing;
             }
+            #endregion
         }
 
         //Player 2 
