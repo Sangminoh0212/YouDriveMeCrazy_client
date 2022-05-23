@@ -23,9 +23,9 @@ namespace Api
             }
         }
 
-        public static IEnumerator InsertScore(string player1, string player2, int point, Action<Scores> callback)
+        public static IEnumerator InsertScore(string player1, string player2, string clearTime, Action<Scores> callback)
         {
-            string url = "http://localhost:8080/scores/" + player1 + "/" + player2 + "/" + point;
+            string url = "http://localhost:8080/scores/" + player1 + "/" + player2 + "/" + clearTime;
             using (UnityWebRequest www = UnityWebRequest.Post(url, ""))
             {
                 yield return www.SendWebRequest();

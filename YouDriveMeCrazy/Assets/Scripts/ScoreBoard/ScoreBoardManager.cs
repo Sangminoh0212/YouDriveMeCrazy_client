@@ -56,10 +56,10 @@ public class ScoreBoardManager : MonoBehaviour
 
     public void InsertScore()
     {
-        StartCoroutine(Api.Api.InsertScore("Lee", "Choi", 150, scores =>
-        {
-            Debug.Log(scores.ToString());
-        }));
+        // StartCoroutine(Api.Api.InsertScore("Lee", "Choi", 150, scores =>
+        // {
+        //     Debug.Log(scores.ToString());
+        // }));
     }
 
     #endregion

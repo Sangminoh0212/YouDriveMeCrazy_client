@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-
+using Debug = UnityEngine.Debug;
 
 
 public static class SavingData
@@ -86,6 +86,14 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 float Stage1ClearTime = float.Parse(SavingData.timeReocrd);
                 SavingData.timeReocrd = (Stage1ClearTime + currentStageClearTime).ToString();
+                
+                // by 상연,
+                // 클리어타임 서버에 전송
+                StartCoroutine(Api.Api.InsertScore(SavingData.player1Name, SavingData.player2Name, SavingData.timeReocrd, scores =>
+                    {
+                        Debug.Log(scores.ToString());
+                    }));
+                
                 StartCoroutine(CallGameClear());
             }
             else {
