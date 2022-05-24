@@ -3,6 +3,7 @@ using System.Globalization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Api;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -92,8 +93,9 @@ public class GameManager : MonoBehaviourPunCallbacks
                 StartCoroutine(Api.Api.InsertScore(SavingData.player1Name, SavingData.player2Name, SavingData.timeReocrd, scores =>
                     {
                         Debug.Log(scores.ToString());
-                    }));
-                
+                    })
+                );
+
                 StartCoroutine(CallGameClear());
             }
             else {
@@ -110,6 +112,18 @@ public class GameManager : MonoBehaviourPunCallbacks
             isGameEnd = true;
             currentStageClearTime = 0;
             StartCoroutine(CallGameOver());
+            
+            // by 상연,
+            // recordDto 변수는 임시로 작성해놓은 것
+            // /Api/RecordDto 클래스 참고해서 실제 객체를 만들어야 함 
+            // 근데 게임 클리어 했을 때도 보내야 함
+            RecordDto recordDto = null;
+            StartCoroutine(Api.Api.Record(recordDto, result =>
+            {
+                // 여기에 어떤 업적이 완료되었는 지 검사 후 화면에 표시하는 로직이 들어가면 됨
+                Debug.Log("안녕하세요. 가정에 평화가 가득하기를 바랍니다.");
+            }));
+
         }
 
     }
