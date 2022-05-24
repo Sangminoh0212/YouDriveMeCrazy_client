@@ -19,19 +19,32 @@ public class ScoreBoardManager : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(Api.Api.LoadScores((data) =>
-        {
-            scoreList = data;
-            
-            PrintScore();
-        }));
+        // StartCoroutine(Api.Api.LoadScores((data) =>
+        // {
+        //     scoreList = data;
+        //     
+        //     PrintScore();
+        // }));
+        //
+        // Scores[] scores = {new Scores(1, "kim", "park", 100)};
+        // ScoresResDto scoresResDto = new ScoresResDto(scores);
+        //
+        // string json = JsonUtility.ToJson(scoresResDto);
+        //
+        // Debug.Log(json);
 
-        Scores[] scores = {new Scores(1, "kim", "park", 100)};
-        ScoresResDto scoresResDto = new ScoresResDto(scores);
-
-        string json = JsonUtility.ToJson(scoresResDto);
-        
-        Debug.Log(json);
+        scoreText.SetText("asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n" +
+                          "asdf\n");
     }
 
     #region private methods
@@ -44,7 +57,7 @@ public class ScoreBoardManager : MonoBehaviour
         {
             Scores score = scoreList[i];
 
-            txt += score.ToString();
+            txt += i + "\t" + score.ToString();
         }
         
         scoreText.SetText(txt);
@@ -56,10 +69,10 @@ public class ScoreBoardManager : MonoBehaviour
 
     public void InsertScore()
     {
-        // StartCoroutine(Api.Api.InsertScore("Lee", "Choi", 150, scores =>
-        // {
-        //     Debug.Log(scores.ToString());
-        // }));
+        StartCoroutine(Api.Api.InsertScore("Lee", "Choi", "150.5", scores =>
+        {
+            Debug.Log(scores.ToString());
+        }));
     }
 
     #endregion
