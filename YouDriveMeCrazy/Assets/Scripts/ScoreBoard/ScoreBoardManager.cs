@@ -19,32 +19,19 @@ public class ScoreBoardManager : MonoBehaviour
     
     void Start()
     {
-        // StartCoroutine(Api.Api.LoadScores((data) =>
-        // {
-        //     scoreList = data;
-        //     
-        //     PrintScore();
-        // }));
-        //
-        // Scores[] scores = {new Scores(1, "kim", "park", 100)};
-        // ScoresResDto scoresResDto = new ScoresResDto(scores);
-        //
-        // string json = JsonUtility.ToJson(scoresResDto);
-        //
-        // Debug.Log(json);
-
-        scoreText.SetText("asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n" +
-                          "asdf\n");
+        StartCoroutine(Api.Api.LoadScores((data) =>
+        {
+            scoreList = data;
+            
+            PrintScore();
+        }));
+        
+        Scores[] scores = {new Scores(1, "kim", "park", 100)};
+        ScoresResDto scoresResDto = new ScoresResDto(scores);
+        
+        string json = JsonUtility.ToJson(scoresResDto);
+        
+        Debug.Log(json);
     }
 
     #region private methods
@@ -57,7 +44,7 @@ public class ScoreBoardManager : MonoBehaviour
         {
             Scores score = scoreList[i];
 
-            txt += i + "\t" + score.ToString();
+            txt += i + "\t" + score.ToString() + "\n";
         }
         
         scoreText.SetText(txt);
@@ -71,6 +58,7 @@ public class ScoreBoardManager : MonoBehaviour
     {
         StartCoroutine(Api.Api.InsertScore("Lee", "Choi", "150.5", scores =>
         {
+            
             Debug.Log(scores.ToString());
         }));
     }
