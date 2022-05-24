@@ -25,9 +25,17 @@ namespace Api
 
         public static IEnumerator InsertScore(string player1, string player2, string clearTime, Action<Scores> callback)
         {
-            string url = "http://localhost:8080/scores/" + player1 + "/" + player2 + "/" + clearTime;
-            using (UnityWebRequest www = UnityWebRequest.Post(url, ""))
+            string url = "http://localhost:8080/scores";
+
+            Scores scores = new Scores(0l, player1, player2, float.Parse(clearTime));
+
+            using (UnityWebRequest www = UnityWebRequest.Post(url, JsonUtility.ToJson(scores)))
             {
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(JsonUtility.ToJson(scores));
+                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+                www.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+                www.SetRequestHeader("Content-Type", "application/json");
+                
                 yield return www.SendWebRequest();
                 if (www.isDone)
                 {
