@@ -45,5 +45,28 @@ namespace Api
                 }
             }
         }
+        
+        public static IEnumerator Record(RecordDto recordDto, Action<RecordResultDto> callback)
+        {
+            string url = "http://localhost:8080/record";
+
+            string json = JsonUtility.ToJson(recordDto);
+
+            using (UnityWebRequest www = UnityWebRequest.Post(url, json))
+            {
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+                www.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+                www.SetRequestHeader("Content-Type", "application/json");
+                
+                yield return www.SendWebRequest();
+                if (www.isDone)
+                {
+                    string result = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+
+                    callback(JsonUtility.FromJson<RecordResultDto>(result));
+                }
+            }
+        }
     }
 }
